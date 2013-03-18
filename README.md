@@ -8,11 +8,11 @@
 		name => 'Test Site',
 		require => Mysql::Db['store']
 	}
-		wp::theme {'roscosmos':
-			location => '/vagrant/store/wp',
+		wp::theme {'twentythirteen':
+			location => '/vagrant/wp',
 			require => Wp::Site['store'],
 		}
 		wp::plugin {'woocommerce':
-			location => '/vagrant/store/wp',
+			location => '/vagrant/wp',
 			require => Wp::Site['store'],
 		}
