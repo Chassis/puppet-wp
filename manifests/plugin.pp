@@ -1,5 +1,4 @@
 define wp::plugin (
-	$name = $title,
 	$location,
 	$ensure = enabled,
 	$networkwide = false
@@ -8,10 +7,10 @@ define wp::plugin (
 
 	case $ensure {
 		enabled: {
-			$command = "activate $name"
+			$command = "activate $title"
 		}
 		disabled: {
-			$command = "deactivate $name"
+			$command = "deactivate $title"
 		}
 		default: {
 			fail("Invalid ensure for wp::plugin")

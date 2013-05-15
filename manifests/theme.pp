@@ -1,13 +1,13 @@
 define wp::theme (
-	$name = $title,
 	$location,
 	$ensure = enabled
 ) {
+	#$name = $title,
 	include wp::cli
 
 	case $ensure {
 		enabled: {
-			$command = "activate $name"
+			$command = "activate $title"
 		}
 		default: {
 			fail("Invalid ensure for wp::theme")
