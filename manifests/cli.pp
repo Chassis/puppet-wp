@@ -1,23 +1,28 @@
-class wp::cli {
-	file {'/usr/local/src/wp-cli':
-		ensure => directory
-	}
+class wp::cli (
+	$command = false,
+	$ensure = false,
+	$install_path = '/usr/local/src/wp-cli',
+) {
 
-	exec {'wget wp-cli.phar':
-		command => 'wget http://wp-cli.org/packages/phar/wp-cli.phar',
-		path => '/usr/bin',
-		cwd => '/usr/local/src/wp-cli',
-		creates => '/usr/local/src/wp-cli/wp-cli.phar'
-	}
-
-	file {'/usr/bin/wp':
-		ensure => file,
-		source => '/usr/local/src/wp-cli/wp-cli.phar',
-		mode => 'a=rx,ug+w',
-		require => Exec[ 'wget wp-cli.phar' ]
+	if ( 'installed' == $ensure ) {
+		# Clone the Git repo
+		exec{ 'git clone wp-cli':
+			command => "/usr/bin/git clone --recursive git://github.com/wp-cli/wp-cli.git $install_path",
+			before => Exec[ 'wp-cli dev-build' ],
+		}
+		# Install composer if needed, run 'composer install', and set up sym link
+		exec { 'wp-cli dev-build':
+			cwd => "$install_path", # wp-cli expects to be installed from pwd
+			command => "/bin/bash $install_path/utils/dev-build",
+			require => Exec[ 'git clone wp-cli' ],
+		}
 	}
 
 	package { 'php5-cli':
+		ensure => installed,
+	}
+
+	package { 'git': 
 		ensure => installed,
 	}
 }
