@@ -14,7 +14,7 @@ class wp::cli (
 		exec { 'wp-cli dev-build':
 			cwd => "$install_path", # wp-cli expects to be installed from pwd
 			command => "/bin/bash $install_path/utils/dev-build",
-			require => Exec[ 'git clone wp-cli' ],
+			require => [ Exec[ 'git clone wp-cli' ], Package['curl'] ],
 			creates => '/usr/bin/wp',
 		}
 	}
@@ -24,6 +24,10 @@ class wp::cli (
 	}
 
 	package { 'git': 
+		ensure => installed,
+	}
+
+	package { 'curl':
 		ensure => installed,
 	}
 }
