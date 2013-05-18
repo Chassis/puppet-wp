@@ -1,6 +1,5 @@
 class wp::cli (
-	$command = false,
-	$ensure = false,
+	$ensure = 'installed',
 	$install_path = '/usr/local/src/wp-cli',
 ) {
 
