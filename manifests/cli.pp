@@ -8,6 +8,7 @@ class wp::cli (
 		exec{ 'git clone wp-cli':
 			command => "/usr/bin/git clone --recursive git://github.com/wp-cli/wp-cli.git $install_path",
 			before => Exec[ 'wp-cli dev-build' ],
+			require => Package[ 'git' ],
 			creates => "$install_path",
 		}
 		# Install composer if needed, run 'composer install', and set up sym link
