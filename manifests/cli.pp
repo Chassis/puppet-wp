@@ -3,7 +3,7 @@ class wp::cli (
 	$install_path = '/usr/local/src/wp-cli',
 ) {
 
-	if ( 'installed' == $ensure ) {
+	if 'installed' == $ensure or 'present' == $ensure {
 		# Clone the Git repo
 		exec{ 'git clone wp-cli':
 			command => "/usr/bin/git clone --recursive git://github.com/wp-cli/wp-cli.git $install_path",
