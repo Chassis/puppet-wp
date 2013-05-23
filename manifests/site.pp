@@ -12,6 +12,6 @@ define wp::site (
 		command => "/usr/bin/wp core install --url='$url' --title='$sitename' --admin_email='$admin_email' --admin_password='$admin_password'",
 		cwd => $location,
 		require => [ Class['wp::cli'] ],
-		unless => '/usr/bin/test `/usr/bin/wp option get home`'
+		unless => '/usr/bin/wp core is-installed'
 	}
 }
