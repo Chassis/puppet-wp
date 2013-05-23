@@ -4,8 +4,6 @@ define wp::option (
 	$value = undef,
 	$ensure = present
 ) {
-	include wp::cli
-
 	case $ensure {
 		present: {
 			$command = "get $name"
@@ -24,10 +22,8 @@ define wp::option (
 		}
 	}
 
-	exec {"wp option $command":
-		command => "/usr/bin/wp option $command",
-		cwd => $location,
-		require => [ Class['wp::cli'] ],
-		onlyif => '/usr/bin/test `/usr/bin/wp option get home`'
+	wp::command { "$location option $command":
+		location => $location,
+		command => "option $command"
 	}
 }

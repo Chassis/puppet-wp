@@ -23,11 +23,8 @@ define wp::plugin (
 	else {
 		$args = "plugin $command"
 	}
-
-	exec {"wp $args":
-		command => "/usr/bin/wp $args",
-		cwd => $location,
-		require => [ Class['wp::cli'] ],
-		onlyif => '/usr/bin/test `/usr/bin/wp option get home`'
+	wp::command { "$location $args":
+		location => $location,
+		command => $args
 	}
 }
