@@ -32,7 +32,8 @@ class wp::cli (
 			require => [
 				File[ "$install_path/installer.sh" ],
 				Package[ 'curl' ],
-				Package[ 'php5-cli' ]
+				Package[ 'php5-cli' ],
+				Package[ 'git' ]
 			],
 			creates => "$install_path/bin/wp"
 		}
@@ -40,7 +41,8 @@ class wp::cli (
 		# Ensure we can run wp-cli
 		file { "$install_path/bin/wp":
 			ensure => "present",
-			mode => "a+x"
+			mode => "a+x",
+			require => Exec[ 'wp-cli install' ]
 		}
 
 		# Symlink it across
@@ -63,8 +65,11 @@ class wp::cli (
 		ensure => installed,
 	}
 
-
 	package { 'curl':
+		ensure => installed,
+	}
+
+	package { 'git':
 		ensure => installed,
 	}
 }
