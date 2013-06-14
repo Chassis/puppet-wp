@@ -34,11 +34,11 @@ class wp::cli (
 				Package[ 'curl' ],
 				Package[ 'php5-cli' ]
 			],
-			creates => "$install_path/wp"
+			creates => "$install_path/bin/wp"
 		}
 
 		# Ensure we can run wp-cli
-		file { "$install_path/wp":
+		file { "$install_path/bin/wp":
 			ensure => "present",
 			mode => "a+x"
 		}
@@ -46,8 +46,8 @@ class wp::cli (
 		# Symlink it across
 		file { '/usr/bin/wp':
 			ensure => link,
-			target => "$install_path/wp",
-			require => File[ "$install_path/wp" ],
+			target => "$install_path/bin/wp",
+			require => File[ "$install_path/bin/wp" ],
 		}
 	}
 	elsif 'absent' == $ensure {
