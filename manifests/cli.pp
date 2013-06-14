@@ -24,7 +24,7 @@ class wp::cli (
 
 		# Install wp-cli
 		exec { "wp-cli install":
-			command => "$install_path/installer.sh",
+			command => "/usr/bin/yes | $install_path/installer.sh",
 			environment => [
 				"VERSION=$version",
 				"INSTALL_DIR=$install_path"
