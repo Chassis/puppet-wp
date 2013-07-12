@@ -61,15 +61,21 @@ class wp::cli (
 		}
 	}
 
-	package { 'php5-cli':
-		ensure => installed,
+	if ! defined(Package['php5-cli']) {
+		package { 'php5-cli':
+			ensure => installed,
+		}
 	}
 
-	package { 'curl':
-		ensure => installed,
+	if ! defined(Package['curl']) {
+		package { 'curl':
+			ensure => installed,
+		}
 	}
 
-	package { 'git':
-		ensure => installed,
+	if ! defined(Package['git']) {
+		package { 'git':
+			ensure => installed,
+		}
 	}
 }
