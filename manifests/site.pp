@@ -6,16 +6,15 @@ define wp::site (
 	$admin_email    = 'admin@example.com',
 	$admin_password = 'password',
 	$network        = false,
-	$subdomains     = false,
-	$base           = '/'
+	$subdomains     = false
 ) {
 	include wp::cli
 
 	if ( $network == true ) and ( $subdomains == true ) {
-		$install = "multisite-install --subdomains --base='$base'"
+		$install = "multisite-install --subdomains --base='$url'"
 	}
 	elsif ( $network == true ) {
-		$install = "multisite-install --base='$base'"
+		$install = "multisite-install --base='$url'"
 	}
 	else {
 		$install = "install --url='$url'"
