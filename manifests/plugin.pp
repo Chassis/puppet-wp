@@ -8,6 +8,15 @@ define wp::plugin (
 	case $ensure {
 		enabled: {
 			$command = "activate $title"
+
+			exec { "wp install plugin $title":
+				cwd     => $location,
+				command => "/usr/bin/wp plugin install $title",
+				unless  => "/usr/bin/wp plugin status $title",
+				before  => Wp::Command["$location plugin $title $ensure"],
+				require => Class["wp::cli"],
+				onlyif  => "/usr/bin/wp core is-installed"
+			}
 		}
 		disabled: {
 			$command = "deactivate $title"
@@ -23,7 +32,7 @@ define wp::plugin (
 	else {
 		$args = "plugin $command"
 	}
-	wp::command { "$location $args":
+	wp::command { "$location plugin $title $ensure":
 		location => $location,
 		command => $args
 	}
