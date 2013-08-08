@@ -12,7 +12,7 @@ define wp::plugin (
 			exec { "wp install plugin $title":
 				cwd     => $location,
 				command => "/usr/bin/wp plugin install $title",
-				unless  => "/usr/bin/wp plugin status $title",
+				unless  => "/usr/bin/wp plugin is-installed $title",
 				before  => Wp::Command["$location plugin $title $ensure"],
 				require => Class["wp::cli"],
 				onlyif  => "/usr/bin/wp core is-installed"
