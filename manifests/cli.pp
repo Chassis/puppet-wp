@@ -3,6 +3,13 @@ class wp::cli (
 	$install_path = '/usr/local/src/wp-cli',
 	$version = 'dev-master'
 ) {
+	$phpprefix = $operatingsystem ? {
+		'RedHat'		=> 'php',
+		'CentOS'		=> 'php',
+		/^(Debian|Ubuntu)$/	=> 'php5',
+		default			=> 'php',
+	} 
+
 	if 'installed' == $ensure or 'present' == $ensure {
 		# Create the install path
 		file { "$install_path":
@@ -32,7 +39,7 @@ class wp::cli (
 			require => [
 				File[ "$install_path/installer.sh" ],
 				Package[ 'curl' ],
-				Package[ 'php5-cli' ],
+				Package[ "$phpprefix-cli" ],
 				Package[ 'git' ]
 			],
 			creates => "$install_path/bin/wp"
@@ -61,8 +68,8 @@ class wp::cli (
 		}
 	}
 
-	if ! defined(Package['php5-cli']) {
-		package { 'php5-cli':
+	if ! defined(Package["$phpprefix-cli"]) {
+		package { "$phpprefix-cli":
 			ensure => installed,
 		}
 	}
