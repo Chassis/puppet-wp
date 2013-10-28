@@ -34,7 +34,9 @@ class wp::cli (
 			command => "/usr/bin/yes | $install_path/installer.sh",
 			environment => [
 				"VERSION=$version",
-				"INSTALL_DIR=$install_path"
+				"INSTALL_DIR=$install_path",
+				"COMPOSER_HOME=$install_path",
+
 			],
 			require => [
 				File[ "$install_path/installer.sh" ],
