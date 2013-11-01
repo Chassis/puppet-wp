@@ -6,11 +6,18 @@ commands as well as installing the WP CLI binaries as needed.
 ## Usage
 
 	# Setup the site
+	wp::download { '/vagrant/wp': }
+	wp::config { '/vagrant/wp':
+		dbname => $db_name,
+		dbuser => $db_user,
+		dbpass => $db_pass,
+		require => Wp::Download['/vagrant/wp']
+	}
 	wp::site {'/vagrant/wp':
 		# location => '/vagrant/wp',
 		url => 'http://wordpress.local',
 		name => 'Test Site',
-		require => Mysql::Db['store']
+		require => [ Mysql::Db['store'], Wp::Config['/vagrant/wp'] ]
 	}
 		wp::rewrite {'/%post_id%/%postname%/':
 			# structure => '/%post_id%/%postname%/',
