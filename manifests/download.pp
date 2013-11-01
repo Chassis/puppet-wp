@@ -24,6 +24,6 @@ define wp::download (
 		command => "/usr/bin/wp core download $download",
 		cwd => $location,
 		require => [ Class['wp::cli'] ],
-		creates => $location
+		creates => [ "$location/wp-admin", "$location/wp-content", "$location/wp-includes" ]
 	}
 }
