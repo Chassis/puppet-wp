@@ -33,7 +33,7 @@ define wp::site (
 			location => $location,
 			ensure => "equal",
 
-			name => "siteurl",
+			key => "siteurl",
 			value => $siteurl
 		}
 	}

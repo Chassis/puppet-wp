@@ -1,21 +1,21 @@
 define wp::option (
 	$location,
-	$name = $title,
+	$key = $title,
 	$value = undef,
 	$ensure = present
 ) {
 	case $ensure {
 		present: {
-			$command = "get $name"
+			$command = "get $key"
 		}
 		equal: {
 			if $value == undef {
 				fail('Option value must be specified')
 			}
-			$command = "update $name $value"
+			$command = "update $key $value"
 		}
 		absent: {
-			$command = "delete $name"
+			$command = "delete $key"
 		}
 		default: {
 			fail('Invalid option operation')
