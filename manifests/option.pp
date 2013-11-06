@@ -16,7 +16,7 @@ define wp::option (
 		}
 		absent: {
 			$command = "delete $name"
-		},
+		}
 		default: {
 			fail('Invalid option operation')
 		}
