@@ -4,7 +4,7 @@ define wp::command (
 ) {
 	include wp::cli
 
-	exec {"wp $command":
+	exec {"$location wp $command":
 		command => "/usr/bin/wp $command",
 		cwd => $location,
 		require => [ Class['wp::cli'] ],
