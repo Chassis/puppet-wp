@@ -3,7 +3,7 @@ class wp::cli (
 	$install_path = '/usr/local/src/wp-cli',
 	$version = 'dev-master'
 ) {
-	$phpprefix = $operatingsystem ? {
+	$phpprefix = $::operatingsystem ? {
 		'RedHat'		=> 'php',
 		'CentOS'		=> 'php',
 		/^(Debian|Ubuntu)$/	=> 'php5',
