@@ -41,7 +41,7 @@ class wp::cli (
 			require => [
 				File[ "$install_path/installer.sh" ],
 				Package[ 'curl' ],
-				Package[ "$phpprefix-cli" ],
+				Package[ "${phpprefix}-cli" ],
 				Package[ 'git' ]
 			],
 			creates => "$install_path/bin/wp"
