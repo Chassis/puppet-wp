@@ -12,10 +12,10 @@ define wp::site (
 	include wp::cli
 
 	if ( $network == true ) and ( $subdomains == true ) {
-		$install = "multisite-install --subdomains --base='$url'"
+		$install = "multisite-install --subdomains --url='$url'"
 	}
 	elsif ( $network == true ) {
-		$install = "multisite-install --base='$url'"
+		$install = "multisite-install --url='$url'"
 	}
 	else {
 		$install = "install --url='$url'"
