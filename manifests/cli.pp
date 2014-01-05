@@ -3,6 +3,13 @@ class wp::cli (
 	$install_path = '/usr/local/src/wp-cli',
 	$version = 'dev-master'
 ) {
+	$phpprefix = $::operatingsystem ? {
+		'RedHat'		=> 'php',
+		'CentOS'		=> 'php',
+		/^(Debian|Ubuntu)$/	=> 'php5',
+		default			=> 'php',
+	} 
+
 	if 'installed' == $ensure or 'present' == $ensure {
 		# Create the install path
 		file { "$install_path":
@@ -11,9 +18,8 @@ class wp::cli (
 
 		# Clone the Git repo
 		exec{ 'wp-cli download':
-			command => "/usr/bin/curl http://wp-cli.org/installer.sh -o $install_path/installer.sh",
+			command => "/usr/bin/curl https://raw.github.com/wp-cli/wp-cli.github.com/master/installer.sh -o $install_path/installer.sh",
 			require => [ Package[ 'curl' ], File[ $install_path ] ],
-			creates => "$install_path/installer.sh",
 		}
 
 		# Ensure we can run the installer
@@ -27,12 +33,14 @@ class wp::cli (
 			command => "/usr/bin/yes | $install_path/installer.sh",
 			environment => [
 				"VERSION=$version",
-				"INSTALL_DIR=$install_path"
+				"INSTALL_DIR=$install_path",
+				"COMPOSER_HOME=$install_path",
+
 			],
 			require => [
 				File[ "$install_path/installer.sh" ],
 				Package[ 'curl' ],
-				Package[ 'php5-cli' ],
+				Package[ "${phpprefix}-cli" ],
 				Package[ 'git' ]
 			],
 			creates => "$install_path/bin/wp"
@@ -61,8 +69,8 @@ class wp::cli (
 		}
 	}
 
-	if ! defined(Package['php5-cli']) {
-		package { 'php5-cli':
+	if ! defined(Package["$phpprefix-cli"]) {
+		package { "$phpprefix-cli":
 			ensure => installed,
 		}
 	}
