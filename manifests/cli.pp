@@ -18,9 +18,8 @@ class wp::cli (
 
 		# Clone the Git repo
 		exec{ 'wp-cli download':
-			command => "/usr/bin/curl http://wp-cli.org/installer.sh -o $install_path/installer.sh",
+			command => "/usr/bin/curl https://raw.github.com/wp-cli/wp-cli.github.com/master/installer.sh -o $install_path/installer.sh",
 			require => [ Package[ 'curl' ], File[ $install_path ] ],
-			creates => "$install_path/installer.sh",
 		}
 
 		# Ensure we can run the installer
