@@ -8,7 +8,7 @@ define wp::site (
 	$admin_password = 'password',
 	$network        = false,
 	$subdomains     = false,
-    $www_user       = 'www-data'
+	$www_user       = 'www-data'
 ) {
 	include wp::cli
 
