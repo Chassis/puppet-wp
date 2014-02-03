@@ -1,6 +1,7 @@
 define wp::command (
 	$location,
-	$command
+	$command,
+	$www_user
 ) {
 	include wp::cli
 
@@ -8,6 +9,6 @@ define wp::command (
 		command => "/usr/bin/wp $command",
 		cwd => $location,
 		require => [ Class['wp::cli'] ],
-		onlyif => '/usr/bin/wp core is-installed'
+		onlyif => "/usr/bin/sudo -u '$www_user' wp core is-installed"
 	}
 }
