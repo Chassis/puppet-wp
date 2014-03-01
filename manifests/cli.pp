@@ -26,7 +26,7 @@ class wp::cli (
 		# Ensure we can run the installer
 		file { "$install_path/wp-cli.phar":
 			ensure => "present",
-			mode => "u+x"
+			mode => "a+x"
 		}
 
 		# Install wp-cli
