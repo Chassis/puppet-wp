@@ -14,37 +14,14 @@ class wp::cli (
 
 	if 'installed' == $ensure or 'present' == $ensure {
 		# Create the install path
-		file { "$install_path":
+		file { [ "$install_path", "$install_path/bin" ]:
 			ensure => directory,
 		}
 
 		# Clone the Git repo
 		exec{ 'wp-cli download':
-			command => "/usr/bin/curl https://raw.github.com/wp-cli/wp-cli.github.com/master/installer.sh -o $install_path/installer.sh",
+			command => "/usr/bin/curl -o $install_path/bin/wp -L https://raw.github.com/wp-cli/builds/gh-pages/phar/wp-cli.phar",
 			require => [ Package[ 'curl' ], File[ $install_path ] ],
-		}
-
-		# Ensure we can run the installer
-		file { "$install_path/installer.sh":
-			ensure => "present",
-			mode => "u+x"
-		}
-
-		# Install wp-cli
-		exec { "wp-cli install":
-			command => "/usr/bin/yes | $install_path/installer.sh",
-			environment => [
-				"VERSION=$version",
-				"INSTALL_DIR=$install_path",
-				"COMPOSER_HOME=$install_path",
-
-			],
-			require => [
-				File[ "$install_path/installer.sh" ],
-				Package[ 'curl' ],
-				Package[ "${phpprefix}-cli" ],
-				Package[ 'git' ]
-			],
 			creates => "$install_path/bin/wp"
 		}
 
@@ -52,7 +29,7 @@ class wp::cli (
 		file { "$install_path/bin/wp":
 			ensure => "present",
 			mode => "a+x",
-			require => Exec[ 'wp-cli install' ]
+			require => Exec[ 'wp-cli download' ]
 		}
 
 		# Symlink it across
