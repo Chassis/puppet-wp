@@ -12,7 +12,7 @@ class wp::cli (
 
 	if 'installed' == $ensure or 'present' == $ensure {
 		# Create the install path
-		file { "$install_path":
+		file { [ "$install_path", "$install_path/bin" ]:
 			ensure => directory,
 		}
 
