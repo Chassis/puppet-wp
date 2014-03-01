@@ -18,19 +18,20 @@ class wp::cli (
 
 		# Clone the Git repo
 		exec{ 'wp-cli download':
-			command => "/usr/bin/curl https://raw.github.com/wp-cli/wp-cli.github.com/master/installer.sh -o $install_path/installer.sh",
+			command => "/usr/bin/curl -o $install_path/wp-cli.phar -L https://raw.github.com/wp-cli/builds/gh-pages/phar/wp-cli.phar",
 			require => [ Package[ 'curl' ], File[ $install_path ] ],
+			creates => "$install_path/wp-cli.phar"
 		}
 
 		# Ensure we can run the installer
-		file { "$install_path/installer.sh":
+		file { "$install_path/wp-cli.phar":
 			ensure => "present",
 			mode => "u+x"
 		}
 
 		# Install wp-cli
 		exec { "wp-cli install":
-			command => "/usr/bin/yes | $install_path/installer.sh",
+			command => "/usr/bin/yes | $install_path/wp-cli.phar",
 			environment => [
 				"VERSION=$version",
 				"INSTALL_DIR=$install_path",
@@ -38,7 +39,7 @@ class wp::cli (
 
 			],
 			require => [
-				File[ "$install_path/installer.sh" ],
+				File[ "$install_path/wp-cli.phar" ],
 				Package[ 'curl' ],
 				Package[ "${phpprefix}-cli" ],
 				Package[ 'git' ]
