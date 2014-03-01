@@ -7,7 +7,8 @@ define wp::site (
 	$admin_email    = 'admin@example.com',
 	$admin_password = 'password',
 	$network        = false,
-	$subdomains     = false
+	$subdomains     = false,
+	$user
 ) {
 	include wp::cli
 
@@ -26,6 +27,7 @@ define wp::site (
 		cwd => $location,
 		user => $::wp::user,
 		require => [ Class['wp::cli'] ],
+		user => $user,
 		unless => '/usr/bin/wp core is-installed'
 	}
 
