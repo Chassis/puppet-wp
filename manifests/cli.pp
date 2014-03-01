@@ -3,6 +3,8 @@ class wp::cli (
 	$install_path = '/usr/local/src/wp-cli',
 	$version = 'dev-master'
 ) {
+	include wp
+
 	$phpprefix = $::operatingsystem ? {
 		'RedHat'		=> 'php',
 		'CentOS'		=> 'php',
