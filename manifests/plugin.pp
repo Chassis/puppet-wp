@@ -13,6 +13,7 @@ define wp::plugin (
 			exec { "wp install plugin $title":
 				cwd     => $location,
 				command => "/usr/bin/wp plugin install $slug",
+				user => $::wp::user,
 				unless  => "/usr/bin/wp plugin is-installed $slug",
 				before  => Wp::Command["$location plugin $slug $ensure"],
 				require => Class["wp::cli"],
