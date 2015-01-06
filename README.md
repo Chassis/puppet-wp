@@ -19,19 +19,22 @@ Puppet WP-CLI is also available via [Puppet Forge](http://forge.puppetlabs.com/r
     puppet module install rmccue/wp
 
 ## Usage
-	wp::download {$wplocation : 
-	    version => $wp_version
+	wp::download {'store' : 
+	  location => '/vagrant/wp',
+	  version => '4.1',
 	} 
-	wp::config {$wplocation : 
+	wp::config {'store' :
+	  location => '/vagrant/wp', 
 	  dbname  => $db_name,
 	  dbhost  => $db_host,
 	  dbuser  => $db_user,
 	  dbpass  => $db_password,
-	  require => Wp::Download[$wplocation]
+	  require => Wp::Download['store']
 	} 
+
 	# Setup the site
-	wp::site {'/vagrant/wp':
-		# location => '/vagrant/wp',
+	wp::site {'store':
+		location => '/vagrant/wp',
 		url => 'http://wordpress.local',
 		name => 'Test Site',
 		require => Mysql::Db['store']
