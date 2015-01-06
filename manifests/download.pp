@@ -19,7 +19,7 @@ define wp::download (
 	    user => $::wp::user,
 	    require => [ Class['wp::cli'] ],
 	    path   => "/bin:/usr/bin:/usr/sbin",
-	    unless => "ls $location | grep wp- > /dev/null 2>&1", 
+	    unless => "ls $location | grep index.php > /dev/null 2>&1", 
 	  }
   }
   elsif 'absent' == $ensure {
