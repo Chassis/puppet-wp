@@ -20,7 +20,7 @@ define wp::theme (
 
   case $ensure {
     enabled: {
-      $command = "activate $title"
+      $command = "activate $theme_name"
     }
     default: {
       fail("Invalid ensure for wp::theme")
