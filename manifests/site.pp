@@ -1,7 +1,7 @@
 define wp::site (
 	$location = $title,
 	$url,
-	$siteurl = $url,
+	$siteurl        = $url,
 	$sitename       = 'WordPress Site',
 	$admin_user     = 'admin',
 	$admin_email    = 'admin@example.com',
@@ -33,8 +33,6 @@ define wp::site (
 		wp::option {"wp siteurl $location":
 			location => $location,
 			ensure => "equal",
-			user => $::wp::user,
-
 			key => "siteurl",
 			value => $siteurl
 		}
