@@ -22,6 +22,10 @@ define wp::theme (
     enabled: {
       $command = "activate $theme_name"
     }
+    installed: {
+      # this is just something to do if we don't want to activate theme
+      $command = "is-installed $theme_name"
+    }
     default: {
       fail("Invalid ensure for wp::theme")
     }
