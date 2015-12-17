@@ -1,7 +1,7 @@
 define wp::site (
 	$location = $title,
-	$url,
-	$siteurl        = $url,
+	$url            = 'www.example.com',
+	$siteurl        = undef,
 	$sitename       = 'WordPress Site',
 	$admin_user     = 'admin',
 	$admin_email    = 'admin@example.com',
@@ -29,7 +29,7 @@ define wp::site (
 		unless => '/usr/bin/wp core is-installed'
 	}
 
-	if $siteurl != $url {
+	if $siteurl != undef and $siteurl != $url {
 		wp::option {"wp siteurl $location":
 			location => $location,
 			ensure => "equal",
