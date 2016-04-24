@@ -12,7 +12,7 @@ define wp::plugin (
 
 			exec { "wp install plugin $title":
 				cwd     => $location,
-        user    => $::wp::user,				
+				user    => $::wp::user,				
 				command => "/usr/bin/wp plugin install $slug",
 				unless  => "/usr/bin/wp plugin is-installed $slug",
 				before  => Wp::Command["$location plugin $slug $ensure"],
