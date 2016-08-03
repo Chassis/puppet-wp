@@ -23,6 +23,9 @@ define wp::plugin (
 		disabled: {
 			$command = "deactivate $slug"
 		}
+		installed: {
+			$command = "install $slug"
+		}
 		default: {
 			fail("Invalid ensure for wp::plugin")
 		}
