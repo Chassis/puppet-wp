@@ -8,7 +8,8 @@ class wp::cli (
 	$phpprefix = $::operatingsystem ? {
 		'RedHat'		=> 'php',
 		'CentOS'		=> 'php',
-		/^(Debian|Ubuntu)$/	=> 'php5',
+		'Debian'  	=> 'php5',
+		'Ubuntu'    => $::operatingsystemmajrelease ?  { '16.04' => 'php7.0', default => php }, 
 		default			=> 'php',
 	} 
 
