@@ -12,6 +12,7 @@ define wp::plugin (
 
 			exec { "wp install plugin $title":
 				cwd     => $location,
+				user    => $::wp::user,				
 				command => "/usr/bin/wp plugin install $slug",
 				user => $::wp::user,
 				unless  => "/usr/bin/wp plugin is-installed $slug",
@@ -22,6 +23,9 @@ define wp::plugin (
 		}
 		disabled: {
 			$command = "deactivate $slug"
+		}
+		installed: {
+			$command = "install $slug"
 		}
 		default: {
 			fail("Invalid ensure for wp::plugin")
