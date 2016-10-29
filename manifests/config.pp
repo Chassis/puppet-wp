@@ -13,9 +13,9 @@ define wp::config (
   
   exec {"wp config $location":
     command => "/usr/bin/wp core $config",
-    user => $::wp::user,
+    user    => $::wp::user,
     require => [ Class['wp::cli'] ],
-    path   => "/bin:/usr/bin:/usr/sbin",
-    unless => "ls $location/wp-config.php | grep wp-config.php > /dev/null 2>&1", 
+    path    => "/bin:/usr/bin:/usr/sbin",
+    creates => "${location}/wp-config.php", 
   }
 }
