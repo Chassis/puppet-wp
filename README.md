@@ -53,9 +53,9 @@ Puppet WP-CLI is also available via [Puppet Forge](http://forge.puppetlabs.com/r
 		require  => Wp::Site['store'],
 	}
 	wp::plugin { 'woocommerce':
-    # ensure => enabled,
-    location => '/vagrant/wp',
-    require => Wp::Site['store'],
+		# ensure => enabled,
+		location => '/vagrant/wp',
+		require => Wp::Site['store'],
 	}
 	wp::plugin { 'debug-bar':
 	    ensure   => enabled,
