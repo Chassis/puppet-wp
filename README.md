@@ -23,50 +23,78 @@ Puppet WP-CLI is also available via [Puppet Forge](http://forge.puppetlabs.com/r
 	# Setup the site
 	wp::site {'/vagrant/wp':
 		# location => '/vagrant/wp',
-		url => 'http://wordpress.local',
-		name => 'Test Site',
-		require => Mysql::Db['store']
+		url        => 'http://wordpress.local',
+		name       => 'Test Site',
+		require    => Mysql::Db['store']
 	}
-		wp::rewrite {'/%post_id%/%postname%/':
-			# structure => '/%post_id%/%postname%/',
-			location => $wplocation,
-			require => Wp::Site['store']
-		}
+	wp::rewrite {'/%post_id%/%postname%/':
+		# structure => '/%post_id%/%postname%/',
+		location    => $wplocation,
+		require     => Wp::Site['store']
+	}
 
-		# Set the options to their required values
-		wp::option {'timezone_string':
-			# key => 'timezone_string',
-			value => 'Australia/Brisbane',
-			location => $wplocation,
-			require => Wp::Site['store']
-		}
-		wp::option {'update_core':
-			# key => 'update_core',
-			ensure => absent,
-			location => $wplocation,
-			require => Wp::Site['store']
-		}
+	# Set the options to their required values
+	wp::option { 'timezone_string':
+		# key    => 'timezone_string',
+		value    => 'Australia/Brisbane',
+		location => $wplocation,
+		require  => Wp::Site['store']
+	}
+	wp::option { 'update_core':
+		# key    => 'update_core',
+		ensure   => absent,
+		location => $wplocation,
+		require  => Wp::Site['store']
+	}
 
-		# Setup themes and plugins
-		wp::theme {'twentythirteen':
-			location => '/vagrant/wp',
-			require => Wp::Site['store'],
-		}
-		wp::plugin {'woocommerce':
-			# ensure => enabled,
-			location => '/vagrant/wp',
-			require => Wp::Site['store'],
-		}
-		wp::plugin {'debug-bar':
-			ensure => installed,
-			location => '/vagrant/wp',
-			require => Wp::Site['store'],
-		}
+	# Setup themes and plugins
+	wp::theme { 'twentythirteen':
+		location => '/vagrant/wp',
+		require  => Wp::Site['store'],
+	}
+	wp::plugin { 'woocommerce':
+    # ensure => enabled,
+    location => '/vagrant/wp',
+    require => Wp::Site['store'],
+	}
+	wp::plugin { 'debug-bar':
+	    ensure   => enabled,
+	    location => '/vagrant/wp',
+	    require  => Class['wp'],
+	    version  => '0.7'
+
+	}
+	wp::plugin { 'debug-bar-extender':
+		ensure   => disabled,
+		location => '/vagrant/wp',
+		require  => Class['wp'],
+	}
+	wp::plugin { 'debug-bar-cron':
+		ensure   => installed,
+		location => '/vagrant/wp',
+		require  => Class['wp'],
+	}
+	wp::plugin { 'debug-bar-transients':
+		ensure   => deleted,
+		location => '/vagrant/wp',
+		require  => Class['wp'],
+	}
+	wp::plugin { 'log-deprecated-notices':
+		ensure   => uninstalled,
+		location => '/vagrant/wp',
+		require  => Class['wp'],
+	}
+	wp::plugin { 'rewrite-rules-inspector':
+		ensure   => enabled,
+		location => '/vagrant/wp',
+		require  => Class['wp'],
+	}
+
 
 ## License
 This code is licensed under the MIT license.
 
-Copyright (c) 2012-2013 Ryan McCue
+Copyright (c) 2012-2016 Ryan McCue
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
