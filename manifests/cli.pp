@@ -11,11 +11,12 @@ class wp::cli (
 			ensure => directory,
 		}
 
-		# Clone the Git repo
+		# Grab the phar
 		exec{ 'wp-cli download':
 			command => "/usr/bin/curl -o $install_path/bin/wp -L https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar",
 			require => [ Package[ 'curl' ], File[ $install_path ] ],
-			creates => "$install_path/bin/wp"
+			creates => "$install_path/bin/wp",
+			unless	=> "/usr/bin/test ${version} = `/usr/bin/wp --version | cut -f2 -d' '` ",
 		}
 
 		# Ensure we can run wp-cli
@@ -36,7 +37,7 @@ class wp::cli (
 		file { "/usr/bin/wp":
 			ensure => absent,
 		}
-		file { "/usr/local/src/wp-cli":
+		file { "$install_path":
 			ensure => absent,
 		}
 	}
