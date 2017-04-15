@@ -11,6 +11,7 @@ define wp::site (
 	$user           = $::wp::user,
 ) {
 	include wp::cli
+	include wp::params
 
 	if ( $network == true ) and ( $subdomains == true ) {
 		$install = "multisite-install --subdomains --url='$url'"
@@ -23,11 +24,11 @@ define wp::site (
 	}
 
 	exec {"wp install $location":
-		command => "/usr/bin/wp core $install --title='$sitename' --admin_email='$admin_email' --admin_name='$admin_user' --admin_password='$admin_password'",
+		command => "${wp::params::bin_path}/wp core $install --title='$sitename' --admin_email='$admin_email' --admin_name='$admin_user' --admin_password='$admin_password'",
 		cwd => $location,
 		user => $user,
 		require => [ Class['wp::cli'] ],
-		unless => '/usr/bin/wp core is-installed'
+		unless => "${wp::params::bin_path}/wp core is-installed"
 	}
 
 	if $siteurl != $url {

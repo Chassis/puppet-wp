@@ -3,12 +3,13 @@ define wp::command (
 	$command
 ) {
 	include wp::cli
+  include wp::params
 
 	exec {"$location wp $command":
-		command => "/usr/bin/wp $command",
+		command => "${wp::params::bin_path}/wp $command",
 		cwd => $location,
 		user => $::wp::user,
 		require => [ Class['wp::cli'] ],
-		onlyif => '/usr/bin/wp core is-installed'
+		onlyif => "${wp::params::bin_path}/wp core is-installed"
 	}
 }
