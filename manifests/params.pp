@@ -1,4 +1,4 @@
 class wp::params {
-	$user = 'www-data',
+	$user = 'www-data'
   $bin_path = '/usr/local/bin'
 }
