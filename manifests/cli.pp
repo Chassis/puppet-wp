@@ -7,13 +7,6 @@ class wp::cli (
 
   $bin_path = $wp::params::bin_path
 
-	$phpprefix = $::operatingsystem ? {
-		'RedHat'		=> 'php',
-		'CentOS'		=> 'php',
-		/^(Debian|Ubuntu)$/	=> 'php5',
-		default			=> 'php',
-	} 
-
 	if 'installed' == $ensure or 'present' == $ensure {
 		# Create the install path
 		file { [ "$install_path", "$install_path/bin" ]:
@@ -50,8 +43,8 @@ class wp::cli (
 		}
 	}
 
-	if ! defined(Package["$phpprefix-cli"]) {
-		package { "$phpprefix-cli":
+	if ! defined( Package[ $::wp::php_package ] ) {
+		package { $::wp::php_package:
 			ensure => installed,
 		}
 	}
