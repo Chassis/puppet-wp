@@ -14,35 +14,34 @@ define wp::site (
 
 	if ( $network == true ) and ( $subdomains == true ) {
 		$install = "multisite-install --subdomains --url='$url'"
-		$convert = "multisite-convert --subdomains --url='$url'"
 	}
 	elsif ( $network == true ) {
 		$install = "multisite-install --url='$url'"
-		$convert = "multisite-convert --url='$url'"
 	}
 	else {
-		$install = "install --url='$url'"
+		$install     = "install --url='$url'"
+		$new_install = true
 	}
 
-	if ( $network ) {
-		exec {"wp multisite-convert $location":
-			command => "/usr/bin/wp core $convert",
-			cwd => $location,
-			logoutput => true,
-			user => $::wp::user,
+	if ( $new_install == true ) {
+		exec { "wp install $location":
+			command => "/usr/bin/wp core $install --title='$sitename
+				' --admin_email='$admin_email' --admin_name='$admin_user
+				' --admin_password='$admin_password'",
+			cwd     => $location,
+			user    => $user,
 			require => [ Class['wp::cli'] ],
-			before => [ Exec[ "wp install $location" ] ],
-			onlyif => '/usr/bin/wp core is-installed',
-			unless => '/usr/bin/wp core is-installed --network',
+			unless  => '/usr/bin/wp core is-installed'
 		}
-	}
-
-	exec {"wp install $location":
-		command => "/usr/bin/wp core $install --title='$sitename' --admin_email='$admin_email' --admin_name='$admin_user' --admin_password='$admin_password'",
-		cwd => $location,
-		user => $user,
-		require => [ Class['wp::cli'] ],
-		unless => '/usr/bin/wp core is-installed'
+	} else {
+		exec { "wp install $location":
+			command => "/usr/bin/wp core $install --title='$sitename
+				' --admin_email='$admin_email' --admin_name='$admin_user
+				' --admin_password='$admin_password'",
+			cwd     => $location,
+			user    => $user,
+			require => [ Class['wp::cli'] ],
+		}
 	}
 
 	if $siteurl != $url {
