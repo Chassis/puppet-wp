@@ -1,4 +1,4 @@
-define wp::site (
+define wp::core (
 	$location = $title,
 	$url,
 	$siteurl = $url,
