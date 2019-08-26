@@ -20,15 +20,15 @@ class wp::cli (
 
 		# Ensure we can run wp-cli
 		file { "$install_path/bin/wp":
-			ensure => "present",
-			mode => "a+x",
+			ensure  => "present",
+			mode    => "a+x",
 			require => Exec[ 'wp-cli download' ]
 		}
 
 		# Symlink it across
 		file { '/usr/bin/wp':
-			ensure => link,
-			target => "$install_path/bin/wp",
+			ensure  => link,
+			target  => "$install_path/bin/wp",
 			require => File[ "$install_path/bin/wp" ],
 		}
 	}
