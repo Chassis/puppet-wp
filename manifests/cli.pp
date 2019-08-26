@@ -20,8 +20,8 @@ class wp::cli (
 
 		# Ensure we can run wp-cli
 		file { "$install_path/bin/wp":
-			ensure  => "present",
-			mode    => "a+x",
+			ensure  => 'present',
+			mode    => 'a+x',
 			require => Exec[ 'wp-cli download' ]
 		}
 
@@ -33,10 +33,10 @@ class wp::cli (
 		}
 	}
 	elsif 'absent' == $ensure {
-		file { "/usr/bin/wp":
+		file { '/usr/bin/wp':
 			ensure => absent,
 		}
-		file { "/usr/local/src/wp-cli":
+		file { '/usr/local/src/wp-cli':
 			ensure => absent,
 		}
 	}
