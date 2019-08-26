@@ -1,3 +1,4 @@
+# A class to install WP-CLI.
 class wp::cli (
 	$ensure = 'installed',
 	$install_path = '/usr/local/src/wp-cli',
@@ -7,13 +8,13 @@ class wp::cli (
 
 	if 'installed' == $ensure or 'present' == $ensure {
 		# Create the install path
-		file { [ "${install_path}", "${install_path}/bin" ]:
+		file { [ $install_path, "${install_path}/bin" ]:
 			ensure => directory,
 		}
 
 		# Clone the Git repo
 		exec{ 'wp-cli download':
-			command => "/usr/bin/curl -o $install_path/bin/wp -L https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar",
+			command => "/usr/bin/curl -o ${install_path}/bin/wp -L https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar",
 			require => [ Package[ 'curl' ], File[ $install_path ] ],
 			creates => "${install_path}/bin/wp"
 		}
