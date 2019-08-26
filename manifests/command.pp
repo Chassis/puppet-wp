@@ -1,4 +1,4 @@
-# A class for
+# A class for WP-CLI commands.
 define wp::command (
 	$location,
 	$command
