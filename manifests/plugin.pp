@@ -18,13 +18,13 @@ define wp::plugin (
 
 	case $ensure {
 		activate: {
-			exec { "wp plugin activate $title $network":
+			exec { "wp plugin activate ${title} ${network}":
 				cwd     => $location,
 				user    => $::wp::user,
-				command => "/usr/bin/wp plugin activate $slug $held",
-				unless  => "/usr/bin/wp plugin is-active $slug",
-				require => Class["wp::cli"],
-				onlyif  => "/usr/bin/wp core is-installed"
+				command => "/usr/bin/wp plugin activate ${slug} ${held}",
+				unless  => "/usr/bin/wp plugin is-active ${slug}",
+				require => Class['wp::cli'],
+				onlyif  => '/usr/bin/wp core is-installed'
 			}
 		}
 		enabled: {
