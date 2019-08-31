@@ -24,8 +24,7 @@ define wp::site (
 	}
 
 	exec {"wp install ${location}":
-		command => "/usr/bin/wp core ${install} --title='${sitename}' --admin_email='${admin_email}'
-		--admin_name='${admin_user}' --admin_password='${admin_password}'",
+		command => "/usr/bin/wp core ${install} --title='${sitename}' --admin_email='${admin_email}' --admin_name='${admin_user}' --admin_password='${admin_password}'",
 		cwd     => $location,
 		user    => $user,
 		require => [ Class['wp::cli'] ],
