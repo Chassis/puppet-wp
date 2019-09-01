@@ -5,6 +5,8 @@
 
 ## Description
 
+Manages plugins, including installs, activations, and updates.
+
 ## Attributes
 ```puppet
     wp::plugin { 'resource title':
