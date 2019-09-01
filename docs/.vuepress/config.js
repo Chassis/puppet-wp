@@ -7,6 +7,7 @@ module.exports = {
         docsBranch: 'master',
         lastUpdated: 'Last Updated',
         editLinkText: 'Suggest an edit!',
+        base: '/puppet-wp/',
         nav: [
             {text: 'Home', link: '/' },
             {text: 'Installation', link: '/installation/' },
