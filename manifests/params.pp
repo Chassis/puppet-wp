@@ -1,3 +1,4 @@
+# A class for parameters we might need to use.
 class wp::params {
 	$user = 'www-data'
 
