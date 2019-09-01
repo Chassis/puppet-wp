@@ -36,6 +36,8 @@ The value of the option to add.
 ### ensure
 (*If omitted, this attribute’s value defaults to present*)
 
+Values: `present`, `equal`, `absent`.
+
 #### Examples
 
 ``` puppet
