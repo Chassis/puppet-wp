@@ -7,7 +7,7 @@ define wp::option (
 ) {
 	case $ensure {
 		present: {
-			$command = "get ${key}"
+			$command = "add ${key}"
 		}
 		equal: {
 			if $value == undef {
