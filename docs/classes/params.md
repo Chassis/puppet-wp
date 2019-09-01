@@ -1,7 +1,7 @@
 # Params
 
-* [Description](/classes/option.html#description)
-* [Attributes](/classes/option.html#attributes)
+* [Description](/classes/params.html#description)
+* [Attributes](/classes/params.html#attributes)
 
 ## Description
 
