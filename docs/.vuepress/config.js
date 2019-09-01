@@ -1,13 +1,13 @@
 module.exports = {
     title: 'Puppet WP',
     description: 'This module enables the easy use of WP CLI to control your WordPress site through Puppet manifests. It provides an easy abstraction for common WP CLI commands as well as installing the WP CLI binaries as needed.',
+    base: '/puppet-wp/',
     themeConfig: {
         repo: 'chassis/puppet-wp',
         editLinks: true,
         docsBranch: 'master',
         lastUpdated: 'Last Updated',
         editLinkText: 'Suggest an edit!',
-        base: '/puppet-wp/',
         nav: [
             {text: 'Home', link: '/' },
             {text: 'Installation', link: '/installation/' },
