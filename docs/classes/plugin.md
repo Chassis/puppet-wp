@@ -10,11 +10,11 @@ Manages plugins, including installs, activations, and updates.
 ## Attributes
 ```puppet
     wp::plugin { 'resource title':
-      location    => # 
-      slug        => #
-      ensure      => # 
-      networkwide => #
-      version     => # The location to run the command.
+      location    => # The location to run the command.
+      slug        => # The slug of the plugin in the WordPress repository.
+      ensure      => # What state the option should be in.
+      networkwide => # Whether the state should be applied network wide.
+      version     => # The version of the plugin to install.
     }
 ```
 
