@@ -13,8 +13,8 @@ class wp::cli (
 		}
 
 		# Clone the Git repo
-		exec{ 'wp-cli download':
-			command => "/usr/bin/curl -o ${install_path}/bin/wp -L https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar",
+		exec { 'wp-cli download':
+			command => "/usr/bin/curl -o $install_path/bin/wp -L https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar",
 			require => [ Package[ 'curl' ], File[ $install_path ] ],
 			creates => "${install_path}/bin/wp"
 		}
