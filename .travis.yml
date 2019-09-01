@@ -1,0 +1,23 @@
+language: ruby
+
+install:
+  - gem install puppet-lint
+
+script:
+  - puppet-lint --fail-on-warnings --no-140chars-check --no-2sp_soft_tabs-check --no-hard_tabs-check --no-names_containing_dash-check --no-autoloader_layout-check --no-nested_classes_or_defines-check manifests
+
+language: node_js
+node_js:
+  - lts/*
+script:
+  - npm install
+  - npm run docs:build
+deploy:
+  provider: pages
+  skip-cleanup: true
+  local_dir: docs/.vuepress/dist
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  target_branch: master
+  on:
+    branch: master
