@@ -13,6 +13,7 @@ Manages themes, including installs, activations, and updates.
       location  => # The location to run the command.
       slug      => # The slug of the theme.
       ensure    => # What state the option should be in.
+      onlyif    => # A test command that checks the state of the target system and restricts when the exec can run.
     }
 ```
 
@@ -20,11 +21,32 @@ Manages themes, including installs, activations, and updates.
 
 The directory from which to run the command. If this directory does not exist, the command will fail.
 
+### slug
+
+The slug of the theme. e.g. `twentynineteen`.
+
 ### ensure
 
 (*If omitted, this attribute’s value defaults to `enabled`.*)
 
 Value: `enabled`.
+
+### onlyif
+
+(*If omitted, this attribute’s value defaults to `/usr/bin/wp core is-installed`.*)
+
+You can pass one or more checks into Puppet for this. e.g.
+
+```puppet
+    wp::command { 'WP-CLI Info':
+        location => '/vagrant'
+        command  => '--info',
+        onlyif   => [
+          '/usr/bin/wp core is-installed',
+          '/usr/bin/wp theme is-active twentynineteen',
+        ]
+    }
+```
 
 #### Examples
 ```puppet
