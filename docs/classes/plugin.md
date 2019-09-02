@@ -15,6 +15,7 @@ Manages plugins, including installs, activations, and updates.
       ensure      => # What state the option should be in.
       networkwide => # Whether the state should be applied network wide.
       version     => # The version of the plugin to install.
+      onlyif      => # A test command that checks the state of the target system and restricts when the exec can run.
     }
 ```
 
@@ -43,6 +44,23 @@ Values: `true`, `false`
 (*If omitted, this attribute’s value defaults to the latest version in the WordPress repository*)
 
 Values: `latest` or a version number e.g. `1.0.1`.
+
+### onlyif
+
+(*If omitted, this attribute’s value defaults to `/usr/bin/wp core is-installed`.*)
+
+You can pass one or more checks into Puppet for this. e.g.
+
+```puppet
+    wp::command { 'WP-CLI Info':
+        location => '/vagrant'
+        command  => '--info',
+        onlyif   => [
+          '/usr/bin/wp core is-installed',
+          '/usr/bin/wp theme is-active twentynineteen',
+        ]
+    }
+```
 
 #### Examples
 Install and activate Yoast SEO.
