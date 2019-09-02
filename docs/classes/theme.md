@@ -31,6 +31,12 @@ The slug of the theme. e.g. `twentynineteen`.
 
 Value: `enabled`.
 
+### version
+
+(*If omitted, this attribute’s value defaults to the latest version in the WordPress repository*)
+
+Values: `latest` or a version number e.g. `1.3`.
+
 ### onlyif
 
 (*If omitted, this attribute’s value defaults to `/usr/bin/wp core is-installed`.*)
@@ -38,13 +44,14 @@ Value: `enabled`.
 You can pass one or more checks into Puppet for this. e.g.
 
 ```puppet
-    wp::command { 'WP-CLI Info':
-        location => '/vagrant'
-        command  => '--info',
-        onlyif   => [
-          '/usr/bin/wp core is-installed',
-          '/usr/bin/wp theme is-active twentynineteen',
-        ]
+  wp::theme { 'Activate Twenty Nineteen':
+    location => '/vagrant',
+    slug     => 'twentynineteen',
+    ensure   => 'enabled'
+    onlyif   => [
+      '/usr/bin/wp core is-installed',
+      '/usr/bin/wp theme is-active twentynineteen',
+     ]
     }
 ```
 
@@ -53,6 +60,7 @@ You can pass one or more checks into Puppet for this. e.g.
   wp::theme { 'Activate Twenty Nineteen':
     location => '/vagrant',
     slug     => 'twentynineteen',
-    ensure   => 'enabled'
+    version  => '1.3',
+    ensure   => 'enabled',
   }
 ```
