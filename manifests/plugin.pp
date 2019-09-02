@@ -5,6 +5,7 @@ define wp::plugin (
 	$ensure = enabled,
 	$networkwide = false,
 	$version = 'latest',
+	$onlyif = '/usr/bin/wp core is-installed',
 ) {
 	include wp::cli
 
@@ -24,7 +25,7 @@ define wp::plugin (
 				command => "/usr/bin/wp plugin activate ${slug} ${held}",
 				unless  => "/usr/bin/wp plugin is-active ${slug}",
 				require => Class['wp::cli'],
-				onlyif  => '/usr/bin/wp core is-installed'
+				onlyif  => $onlyif,
 			}
 		}
 		enabled: {
@@ -34,7 +35,7 @@ define wp::plugin (
 				command => "/usr/bin/wp plugin install ${slug} --activate ${held}",
 				unless  => "/usr/bin/wp plugin is-installed ${slug}",
 				require => Class['wp::cli'],
-				onlyif  => '/usr/bin/wp core is-installed'
+				onlyif  => $onlyif,
 			}
 		}
 		disabled: {
@@ -43,17 +44,17 @@ define wp::plugin (
 				user    => $::wp::user,
 				command => "/usr/bin/wp plugin deactivate ${slug}",
 				require => Class['wp::cli'],
-				onlyif  => '/usr/bin/wp core is-installed'
+				onlyif  => $onlyif,
 			}
 		}
 		installed: {
 			exec { "wp install plugin ${title}${network}${held}":
 				cwd     => $location,
 				user    => $::wp::user,
-				command => "/usr/bin/wp plugin install ${slug} --activate ${held}",
+				command => "/usr/bin/wp plugin install ${slug} ${held}",
 				unless  => "/usr/bin/wp plugin is-installed ${slug}",
 				require => Class['wp::cli'],
-				onlyif  => '/usr/bin/wp core is-installed'
+				onlyif  => $onlyif,
 			}
 		}
 		deleted: {
@@ -62,7 +63,7 @@ define wp::plugin (
 				user    => $::wp::user,
 				command => "/usr/bin/wp plugin delete ${slug}",
 				require => Class['wp::cli'],
-				onlyif  => '/usr/bin/wp core is-installed'
+				onlyif  => $onlyif,
 			}
 		}
 		uninstalled: {
@@ -71,7 +72,7 @@ define wp::plugin (
 				user    => $::wp::user,
 				command => "/usr/bin/wp plugin uninstall ${slug} --deactivate",
 				require => Class['wp::cli'],
-				onlyif  => '/usr/bin/wp core is-installed'
+				onlyif  => $onlyif,
 			}
 		}
 		default: {
