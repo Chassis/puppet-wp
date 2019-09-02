@@ -33,7 +33,7 @@ The slug of the theme. e.g. `twentynineteen`.
 
 (*If omitted, this attribute’s value defaults to `enabled`.*)
 
-Value: `enabled`.
+Values: `activate`, `enabled`, `disabled`, `installed`, `deleted` or `mod`.
 
 ### version
 
