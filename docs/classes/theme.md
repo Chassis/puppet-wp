@@ -63,7 +63,8 @@ You can pass one or more checks into Puppet for this. e.g.
 
 (*If omitted, this attribute’s value defaults to `false`.*)
 
-If set this will delete all the themes apart from the theme that has been passed into the class.
+If set this and `ensure => 'deleted'` then it will delete all the themes apart from the active theme.
+If set this and `mod => 'remove'` then it will delete all theme mods.
 
 Value: `true`.
 

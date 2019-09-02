@@ -22,7 +22,7 @@ define wp::theme (
 	}
 
 	if ( $all ) {
-		$all_themes = ' --all'
+		$remove_all = ' --all'
 	}
 
 	case $ensure {
@@ -39,10 +39,18 @@ define wp::theme (
 			$command = "install ${slug}${held}"
 		}
 		deleted: {
-			$command = "delete ${slug}${held}${all}"
+			if ( $all ) and ( $mod != false ) {
+				$command = "delete ${slug}${held}$"
+			} else {
+				$command = "delete ${remove_all}"
+			}
 		}
 		mod: {
-			$command = "mod ${mod} ${key} ${value}"
+			if ( $all ) and ( $mod != 'remove' ) {
+				$command = "mod ${mod} ${key} ${value}"
+			} else {
+				$command = "mod ${mod} ${remove_all}"
+			}
 		}
 		default: {
 			fail('Invalid ensure for wp::theme')
