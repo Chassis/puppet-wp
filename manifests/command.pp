@@ -1,7 +1,8 @@
 # A class for WP-CLI commands.
 define wp::command (
 	$location,
-	$command
+	$command,
+	$onlyif = '/usr/bin/wp core is-installed',
 ) {
 	include wp::cli
 
@@ -10,6 +11,6 @@ define wp::command (
 		cwd     => $location,
 		user    => $::wp::user,
 		require => [ Class['wp::cli'] ],
-		onlyif  => '/usr/bin/wp core is-installed'
+		onlyif  => $onlyif,
 	}
 }
