@@ -51,7 +51,7 @@ define wp::plugin (
 			exec { "wp install plugin ${title}${network}${held}":
 				cwd     => $location,
 				user    => $::wp::user,
-				command => "/usr/bin/wp plugin install ${slug} --activate ${held}",
+				command => "/usr/bin/wp plugin install ${slug} ${held}",
 				unless  => "/usr/bin/wp plugin is-installed ${slug}",
 				require => Class['wp::cli'],
 				onlyif  => $onlyif,
