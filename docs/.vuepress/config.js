@@ -31,6 +31,7 @@ module.exports = {
                     ['/classes/params', 'Params'],
                     ['/classes/plugin', 'Plugin'],
                     ['/classes/rewrite', 'Rewrite'],
+                    ['/classes/role', 'Role'],
                     ['/classes/site', 'Site'],
                     ['/classes/theme', 'Theme'],
                 ],
