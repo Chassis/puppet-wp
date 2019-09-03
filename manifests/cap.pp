@@ -4,7 +4,8 @@ define wp::cap (
   $ensure = present,
   $role,
   $cap,
-  $grant = true,
+  $grant  = true,
+  $user   = $::wp::user,
   $onlyif = '/usr/bin/wp core is-installed',
 ) {
   case $ensure {
@@ -21,6 +22,7 @@ define wp::cap (
   wp::command { "${location} cap ${command}":
     location => $location,
     command  => "cap ${command}",
+    user     => $user,
     onlyif   => $onlyif,
   }
 }

@@ -1,11 +1,12 @@
 # A class for WordPress options.
 define wp::option (
 	$location,
-	$key = $title,
-	$value = undef,
-	$ensure = present,
-	$format = 'plaintext',
+	$key      = $title,
+	$value    = undef,
+	$ensure   = present,
+	$format   = 'plaintext',
 	$autoload = true,
+	$user     = $::wp::user,
 ) {
 	case $ensure {
 		present: {
@@ -27,6 +28,7 @@ define wp::option (
 
 	wp::command { "${location} option ${command}":
 		location => $location,
-		command  => "option ${command}"
+		command  => "option ${command}",
+		user     => $user,
 	}
 }

@@ -18,7 +18,8 @@ Manages plugins, including installs, activations, and updates.
       all         => # Set this to delete all plugins.
       skipdelete  => # Only run the uninstall procedure.
       unless      => # A test command that checks the state of the target system and restricts when the command can run.
-      onlyif      => # A test command that checks the state of the target system and restricts when the exec can run.
+      user        => # The user to run the command as.
+      onlyif      => # A test command that checks the state of the target system and restricts when the command can run.
     }
 ```
 
@@ -65,6 +66,10 @@ Values: `''` or `true`.
 (*If omitted, this attribute’s value defaults to `undef` which Puppet treats as `false`.*)
 
 A test command that checks the state of the target system and restricts when the command can run.
+
+### user
+
+(*If omitted, this attribute’s value defaults to `www-data`.*)
 
 ### onlyif
 

@@ -15,6 +15,7 @@ Adds or removes capabilities of a user role.
       role        => # The role name.
       cap         => # The type of capablity.
       grant       => # A boolean value.
+      user        => # The user to run the command as.
       onlyif      => # A test command that checks the state of the target system and restricts when the exec can run.
     }
 ```
@@ -46,6 +47,10 @@ The name of the capability. e.g. `approver`.
 A boolean value of whether or not the role has the capability.
 
 Values: `true` or `false`.
+
+### user
+
+(*If omitted, this attribute’s value defaults to `www-data`.*)
 
 ### onlyif
 

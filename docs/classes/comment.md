@@ -13,6 +13,7 @@ Creates, updates and deletes comments.
       location    => # The location to run the command.
       ensure      => # What state the cap should be in.
       metacommand => # Is the comment's meta being altered.
+      user        => # The user to run the command as.
       args        => # The string of arguments to pass to the comment command. 
       onlyif      => # A test command that checks the state of the target system and restricts when the exec can run.
     }
@@ -37,6 +38,10 @@ Values: `present`, `absent`, `generate` or `meta`.
 The type of meta command to run.
 
 Values: `add`, `delete`, `patch` or `update`.
+
+### user
+
+(*If omitted, this attribute’s value defaults to `www-data`.*)
 
 ### args
 

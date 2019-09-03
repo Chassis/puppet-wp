@@ -13,6 +13,7 @@ Manages themes, including installs, activations, and updates.
       location  => # The location to run the command.
       slug      => # The slug of the theme.
       ensure    => # What state the option should be in.
+      user        => # The user to run the command as.
       onlyif    => # A test command that checks the state of the target system and restricts when the exec can run.
       all       => # If set this will delete all the themes apart from the theme that has been passed into the class.
       mod       => # The action of the theme mod.
@@ -40,6 +41,10 @@ Values: `activate`, `enabled`, `disabled`, `installed`, `deleted` or `mod`.
 (*If omitted, this attribute’s value defaults to the latest version in the WordPress repository*)
 
 Values: `latest` or a version number e.g. `1.3`.
+
+### user
+
+(*If omitted, this attribute’s value defaults to `www-data`.*)
 
 ### onlyif
 

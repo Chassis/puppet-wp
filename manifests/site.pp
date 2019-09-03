@@ -1,8 +1,8 @@
 # A class for WP-CLI site commands.
 define wp::site (
 	$url,
-	$location = $title,
-	$siteurl = $url,
+	$location       = $title,
+	$siteurl        = $url,
 	$sitename       = 'WordPress Site',
 	$admin_user     = 'admin',
 	$admin_email    = 'admin@example.com',

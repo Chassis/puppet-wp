@@ -4,7 +4,8 @@ define wp::role (
   $ensure = present,
   $id,
   $rolename,
-  $all = false,
+  $all    = false,
+  $user   = $::wp::user,
   $onlyif = '/usr/bin/wp core is-installed',
 ) {
   include wp::cli
@@ -31,6 +32,7 @@ define wp::role (
   wp::command { "${location} role ${command}":
     location => $location,
     command  => $command,
+    user     => $user,
     onlyif   => $onlyif,
   }
 }

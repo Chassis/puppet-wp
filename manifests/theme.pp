@@ -1,15 +1,16 @@
 # A class for WP-CLI theme commands.
 define wp::theme (
 	$location,
-	$slug = $title,
-	$ensure = enabled,
+	$slug        = $title,
+	$ensure      = enabled,
 	$networkwide = false,
-	$version = 'latest',
-	$onlyif = '/usr/bin/wp core is-installed',
-	$all = false,
-	$mod = false,
-	$key = false,
-	$value = false,
+	$version     = 'latest',
+	$user        = $::wp::user,
+	$onlyif      = '/usr/bin/wp core is-installed',
+	$all         = false,
+	$mod         = false,
+	$key         = false,
+	$value       = false,
 ) {
 	include wp::cli
 
@@ -59,6 +60,7 @@ define wp::theme (
 	wp::command { "${location} theme ${command}":
 		location => $location,
 		command  => "theme ${command}",
+		user     => $user,
 		onlyif   => $onlyif,
 	}
 }

@@ -16,6 +16,7 @@ Retrieves and sets site options, including plugin and WordPress settings.
         ensure   => # What state the option should be in.
         format   => # The serialization format for the value.
         autoload => # Should this option be automatically loaded.
+        user        => # The user to run the command as.
 	}
 ```
 
@@ -52,6 +53,10 @@ Values: `plaintext` or `json`.
 (*If omitted, this attribute’s value defaults to `true`*).
 
 Values: `true` or `false`.
+
+### user
+
+(*If omitted, this attribute’s value defaults to `www-data`.*)
 
 #### Examples
 
