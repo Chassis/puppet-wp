@@ -35,6 +35,7 @@ module.exports = {
                     ['/classes/role', 'Role'],
                     ['/classes/site', 'Site'],
                     ['/classes/theme', 'Theme'],
+                    ['/classes/user', 'User'],
                 ],
             },
             {
