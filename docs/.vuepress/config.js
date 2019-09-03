@@ -25,6 +25,7 @@ module.exports = {
                 title: 'Classes',
                 collapsable: false,
                 children: [
+                    ['/classes/cap', 'Cap'],
                     ['/classes/cli', 'CLI'],
                     ['/classes/command', 'Command'],
                     ['/classes/option', 'Option'],
