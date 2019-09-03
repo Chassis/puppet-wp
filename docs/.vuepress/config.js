@@ -42,7 +42,8 @@ module.exports = {
                 title: 'Docs',
                 collapsable: false,
                 children: [
-                    [ '/docs/', 'Documentation' ]
+                    [ '/docs/', 'Documentation' ],
+                    [ '/docs/puppet-forge', 'Puppet Forge' ],
                 ],
             },
             {
