@@ -6,6 +6,8 @@ class wp::user (
   $user   = $::wp::user,
   $onlyif = '/usr/bin/wp core is-installed',
 ) {
+  include wp::cli
+
   case $ensure {
     present: {
       $command = "create ${args}"

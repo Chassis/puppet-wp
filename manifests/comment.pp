@@ -7,6 +7,8 @@ class wp::comment (
   $onlyif      = '/usr/bin/wp core is-installed',
   $args,
 ) {
+  include wp::cli
+
   case $ensure {
     present: {
       $command = "create ${args}"
