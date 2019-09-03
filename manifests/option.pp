@@ -3,11 +3,13 @@ define wp::option (
 	$location,
 	$key = $title,
 	$value = undef,
-	$ensure = present
+	$ensure = present,
+	$format = 'plaintext',
+	$autoload = true,
 ) {
 	case $ensure {
 		present: {
-			$command = "add ${key}"
+			$command = "add ${key} --format=${format} --autoload=${autoload}"
 		}
 		equal: {
 			if $value == undef {

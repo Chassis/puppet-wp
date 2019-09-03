@@ -14,6 +14,8 @@ Retrieves and sets site options, including plugin and WordPress settings.
         key      => # The name of the option to add.
         value    => # The value of the option to add.
         ensure   => # What state the option should be in.
+        format   => # The serialization format for the value.
+        autoload => # Should this option be automatically loaded.
 	}
 ```
 
@@ -29,14 +31,27 @@ The name of the option to add.
 
 ### value
 
-(*If omitted, this attribute’s value defaults undefined.*)
+(*If omitted, this attribute’s value defaults `undef`.*)
 
 The value of the option to add.
 
 ### ensure
-(*If omitted, this attribute’s value defaults to present*)
+
+(*If omitted, this attribute’s value defaults to `present`*)
 
 Values: `present`, `equal`, `absent`.
+
+### format
+
+(*If omitted, this attribute’s value defaults to `plaintext`*)
+
+Values: `plaintext` or `json`.
+
+### autoload
+
+(*If omitted, this attribute’s value defaults to `true`*).
+
+Values: `true` or `false`.
 
 #### Examples
 
