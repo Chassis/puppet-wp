@@ -30,6 +30,10 @@ The actual command to execute. For example of you wanted to run `wp --info` you 
     }
 ```
 
+### user
+
+(*If omitted, this attribute’s value defaults to `www-data`.*)
+
 ### onlyif
 
 (*If omitted, this attribute’s value defaults to `/usr/bin/wp core is-installed`.*)

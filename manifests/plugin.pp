@@ -79,4 +79,5 @@ define wp::plugin (
 			fail( 'Invalid ensure argument passed into wp::plugin' )
 		}
 	}
+
 }
