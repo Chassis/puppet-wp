@@ -20,61 +20,25 @@ define wp::plugin (
 
 	case $ensure {
 		activate: {
-			exec { "wp plugin activate ${title} ${network}":
-				cwd     => $location,
-				user    => $::wp::user,
-				command => "/usr/bin/wp plugin activate ${slug} ${held}",
-				unless  => "/usr/bin/wp plugin is-active ${slug}",
-				require => Class['wp::cli'],
-				onlyif  => $onlyif,
-			}
+				$command = "activate ${slug} ${held}"
+				$unless  = "is-active ${slug}"
 		}
 		enabled: {
-			exec { "wp install plugin ${title} --activate${network}${held}":
-				cwd     => $location,
-				user    => $::wp::user,
-				command => "/usr/bin/wp plugin install ${slug} --activate ${held}",
-				unless  => "/usr/bin/wp plugin is-installed ${slug}",
-				require => Class['wp::cli'],
-				onlyif  => $onlyif,
-			}
+				$command = "plugin install ${slug} --activate ${held}"
+				$unless  = "plugin is-installed ${slug}"
 		}
 		disabled: {
-			exec { "wp deactivate plugin ${title}${network}${held}":
-				cwd     => $location,
-				user    => $::wp::user,
-				command => "/usr/bin/wp plugin deactivate ${slug}",
-				require => Class['wp::cli'],
-				onlyif  => $onlyif,
-			}
+      $command = "plugin deactivate ${slug}"
 		}
 		installed: {
-			exec { "wp install plugin ${title}${network}${held}":
-				cwd     => $location,
-				user    => $::wp::user,
-				command => "/usr/bin/wp plugin install ${slug} ${held}",
-				unless  => "/usr/bin/wp plugin is-installed ${slug}",
-				require => Class['wp::cli'],
-				onlyif  => $onlyif,
-			}
+				$command = "plugin install ${slug} ${held}"
+				$unless  = "plugin is-installed ${slug}"
 		}
 		deleted: {
-			exec { "wp delete plugin ${title}":
-				cwd     => $location,
-				user    => $::wp::user,
-				command => "/usr/bin/wp plugin delete ${slug}",
-				require => Class['wp::cli'],
-				onlyif  => $onlyif,
-			}
+			$command = "plugin delete ${slug}"
 		}
 		uninstalled: {
-			exec { "wp uninstall plugin ${title}":
-				cwd     => $location,
-				user    => $::wp::user,
-				command => "/usr/bin/wp plugin uninstall ${slug} --deactivate",
-				require => Class['wp::cli'],
-				onlyif  => $onlyif,
-			}
+		  $command = "plugin uninstall ${slug} --deactivate"
 		}
 		default: {
 			fail( 'Invalid ensure argument passed into wp::plugin' )
