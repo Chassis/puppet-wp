@@ -25,7 +25,7 @@ the following:
 1. Run `yarn docs:dev` and open [http://localhost:8080/]( http://localhost:8080/) in a browser.
 1. Run `yarn docs:build` to build static assets.
 
-## Documentation Deployment.
+## Documentation Deployment
 
 The [documentation](https://chassis.github.io/puppet-wp/) is hosted on Github Pages and this is automatically [deployed](https://github.com/Chassis/puppet-wp/blob/master/.travis.yml#L9-L23) with [TravisCI](https://travis-ci.org/).
 
