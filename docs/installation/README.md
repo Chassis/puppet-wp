@@ -13,5 +13,5 @@ git submodule add https://github.com/Chassis/puppet-wp.git modules/wp
 
 Puppet WP-CLI is also available via Puppet Forge.
 ``` shell script
-puppet module install rmccue/wp
+puppet module install chassis-puppet_wp
 ```
