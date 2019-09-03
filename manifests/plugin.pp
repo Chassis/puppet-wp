@@ -5,6 +5,7 @@ define wp::plugin (
 	$ensure = enabled,
 	$networkwide = false,
 	$version = 'latest',
+	$unless = undef,
 	$onlyif = '/usr/bin/wp core is-installed',
 ) {
 	include wp::cli
@@ -79,5 +80,10 @@ define wp::plugin (
 			fail( 'Invalid ensure argument passed into wp::plugin' )
 		}
 	}
-
+	wp::command { "${location} plugin ${command}":
+		location => $location,
+		command  => "plugin ${command}",
+		unless   => $unless,
+		onlyif   => $onlyif,
+	}
 }

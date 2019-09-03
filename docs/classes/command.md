@@ -12,6 +12,8 @@ Executes WP-CLI commands.
 	wp::command { 'resource title':
 		location => # The location to run the command
 		command  => # The WP-CLI command to run
+		user     => # The user to run the command as.
+		unless   => # A test command that checks the state of the target system and restricts when the command can run
 		onlyif   => # A test command that checks the state of the target system and restricts when the exec can run.
 	}
 ```
@@ -33,6 +35,12 @@ The actual command to execute. For example of you wanted to run `wp --info` you 
 ### user
 
 (*If omitted, this attribute’s value defaults to `www-data`.*)
+
+### unless
+
+(*If omitted, this attribute’s value defaults to `undef` which Puppet treats as `false`.*)
+
+A test command that checks the state of the target system and restricts when the exec can run.
 
 ### onlyif
 
