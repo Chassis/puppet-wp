@@ -8,6 +8,8 @@ define wp::option (
 	$autoload = true,
 	$user     = $::wp::user,
 ) {
+	include wp::cli
+
 	case $ensure {
 		present: {
 			$command = "add ${key} --format=${format} --autoload=${autoload}"
