@@ -15,6 +15,7 @@ Manages user roles, including creating new roles and resetting to defaults.
       id        => # The role ID.
       rolename  => # The role name.
       all       => # If set this will delete all the themes apart from the theme that has been passed into the class.
+      user      => # The user to run the command as.
       onlyif    => # A test command that checks the state of the target system and restricts when the exec can run.
     }
 ```
@@ -46,6 +47,12 @@ The description for the role. e.g. `Approver`
 If this is set to `true` and `ensure => reset` then all roles will be reset.
 
 Values: `true` or `false`.
+
+### user
+
+(*If omitted, this attribute’s value defaults to `www-data`.*)
+
+The user to use to run the command.
 
 ### onlyif
 

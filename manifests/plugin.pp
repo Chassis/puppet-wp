@@ -8,6 +8,7 @@ define wp::plugin (
 	$all         = '',
 	$skipdelete  = '',
 	$unless      = undef,
+	$user        = $::wp::user,
 	$onlyif      = '/usr/bin/wp core is-installed',
 ) {
 	include wp::cli
@@ -58,6 +59,7 @@ define wp::plugin (
 		location => $location,
 		command  => "plugin ${command}",
 		unless   => $unless,
+		user     => $user,
 		onlyif   => $onlyif,
 	}
 }

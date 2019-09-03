@@ -3,6 +3,7 @@ class wp::user (
   $location,
   $ensure = present,
   $args,
+  $user   = $::wp::user,
   $onlyif = '/usr/bin/wp core is-installed',
 ) {
   case $ensure {
@@ -49,6 +50,7 @@ class wp::user (
   wp::command { "${location} user ${command}":
     location => $location,
     command  => "user ${command}",
+    user     => $user,
     onlyif   => $onlyif,
   }
 }
