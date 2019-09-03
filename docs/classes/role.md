@@ -25,6 +25,8 @@ The directory from which to run the command. If this directory does not exist, t
 
 ### ensure
 
+(*If omitted, this attribute’s value defaults to `present`.*)
+
 The action to run for the role.
 
 Values: `enabled`, `deleted` or `reset`.
