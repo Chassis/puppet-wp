@@ -1,22 +1,22 @@
 # A class for WP-CLI's commend commands.
 class wp::comment (
   $location,
-  $ensure      = 'present',
+  $ensure      = present,
   $metacommand = false,
   $onlyif      = '/usr/bin/wp core is-installed',
   $args,
 ) {
   case $ensure {
-    'present': {
+    present: {
       $command = "create ${args}"
     }
-    'absent': {
+    absent: {
       $command = "delete ${args}"
     }
-    'generate': {
+    generate: {
       $command = "generate ${args}"
     }
-    'meta': {
+    meta: {
       $command = "${metacommand} ${args}"
     }
     default: {

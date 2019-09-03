@@ -1,17 +1,17 @@
 # A class for WP-CLI's cap commands.
 define wp::cap (
   $location,
-  $ensure = 'present',
+  $ensure = present,
   $role,
   $cap,
   $grant = true,
   $onlyif = '/usr/bin/wp core is-installed',
 ) {
   case $ensure {
-    'present': {
+    present: {
       $command = "add ${role} ${cap} --grant=${grant}"
     }
-    'absent': {
+    absent: {
       $command = "remove ${role} ${cap}"
     }
     default: {

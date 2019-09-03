@@ -1,7 +1,7 @@
 # A class for WP-CLI roles.
 define wp::role (
   $location,
-  $ensure,
+  $ensure = present,
   $id,
   $rolename,
   $all = false,
