@@ -15,6 +15,8 @@ Manages plugins, including installs, activations, and updates.
       ensure      => # What state the option should be in.
       networkwide => # Whether the state should be applied network wide.
       version     => # The version of the plugin to install.
+      all         => # Set this to delete all plugins.
+      skipdelete  => # Only run the uninstall procedure.
       unless      => # A test command that checks the state of the target system and restricts when the command can run.
       onlyif      => # A test command that checks the state of the target system and restricts when the exec can run.
     }
@@ -30,13 +32,13 @@ The directory from which to run the command. If this directory does not exist, t
 
 ### ensure
 
-(*If omitted, this attribute’s value defaults to enabled.*)
+(*If omitted, this attribute’s value defaults to `enabled`.*)
 
 Values: `activate`, `enabled`, `disabled`, `installed`, `deleted`, `uninstalled`.
 
 ### networkwide
 
-(*If omitted, this attribute’s value defaults to false*)
+(*If omitted, this attribute’s value defaults to `false`*)
 
 Values: `true`, `false`
 
@@ -45,6 +47,18 @@ Values: `true`, `false`
 (*If omitted, this attribute’s value defaults to the latest version in the WordPress repository*)
 
 Values: `latest` or a version number e.g. `1.0.1`.
+
+### all
+
+(*If omitted, this attribute’s value defaults to `''`*)
+
+Values: `''` or `true`.
+
+### skipdelete
+
+(*If omitted, this attribute’s value defaults to `''`*)
+
+Values: `''` or `true`.
 
 ### unless
 
