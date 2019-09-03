@@ -5,6 +5,8 @@ define wp::plugin (
 	$ensure      = enabled,
 	$networkwide = false,
 	$version     = 'latest',
+	$all         = '',
+	$skipdelete  = '',
 	$unless      = undef,
 	$onlyif      = '/usr/bin/wp core is-installed',
 ) {
@@ -16,6 +18,14 @@ define wp::plugin (
 
 	if ( $version != 'latest' ) {
 		$held = " --version=${version}"
+	}
+
+	if ( empty( $all ) ) {
+		$all = ' --all'
+	}
+
+	if ( empty( $skipdelete ) ) {
+		$skipdelete = ' --skip-delete'
 	}
 
 	case $ensure {
@@ -35,10 +45,10 @@ define wp::plugin (
 			$unless = "plugin is-installed ${slug}"
 		}
 		deleted: {
-			$command = "plugin delete ${slug}"
+			$command = "plugin delete ${slug}${all}"
 		}
 		uninstalled: {
-			$command = "plugin uninstall ${slug} --deactivate"
+			$command = "plugin uninstall ${slug} --deactivate${skipdelete}"
 		}
 		default: {
 			fail('Invalid ensure argument passed into wp::plugin')
