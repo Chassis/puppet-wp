@@ -28,6 +28,8 @@ module.exports = {
                     ['/classes/cap', 'Cap'],
                     ['/classes/cli', 'CLI'],
                     ['/classes/command', 'Command'],
+                    ['/classes/command', 'Comment'],
+                    ['/classes/command', 'Config'],
                     ['/classes/option', 'Option'],
                     ['/classes/params', 'Params'],
                     ['/classes/plugin', 'Plugin'],
