@@ -1,5 +1,5 @@
-# A class for WP-CLI site commands.
-define wp::site (
+# A class for WP-CLI core commands.
+define wp::core (
 	$url,
 	$location       = $title,
 	$siteurl        = $url,
@@ -23,12 +23,14 @@ define wp::site (
 		$install = "install --url='${url}'"
 	}
 
-	exec {"wp install ${location}":
-		command => "/usr/bin/wp core ${install} --title='${sitename}' --admin_email='${admin_email}' --admin_name='${admin_user}' --admin_password='${admin_password}'",
-		cwd     => $location,
-		user    => $user,
-		require => [ Class['wp::cli'] ],
-		unless  => '/usr/bin/wp core is-installed'
+	$command = "${install} --title='${sitename}' --admin_email='${admin_email}' --admin_user='${admin_user}' --admin_password='${admin_password}'",
+
+	wp::command { "${location} core ${command}":
+		location => $location,
+		command  => "core ${command}",
+		unless   => '/usr/bin/wp core is-installed',
+		user     => $user,
+		onlyif   => [],
 	}
 
 	if $siteurl != $url {
