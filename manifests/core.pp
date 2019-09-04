@@ -23,7 +23,7 @@ define wp::core (
 		$install = "install --url='${url}'"
 	}
 
-	$command = "${install} --title='${sitename}' --admin_email='${admin_email}' --admin_user='${admin_user}' --admin_password='${admin_password}'",
+	$command = "${install} --title='${sitename}' --admin_email='${admin_email}' --admin_user='${admin_user}' --admin_password='${admin_password}'"
 
 	wp::command { "${location} core ${command}":
 		location => $location,
