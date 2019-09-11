@@ -35,7 +35,6 @@ define wp::core (
 			location => $location,
 			ensure => "equal",
 			user => $user,
-
 			key => "siteurl",
 			value => $siteurl
 		}
