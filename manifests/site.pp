@@ -1,43 +1,35 @@
-# A class for WP-CLI site commands.
+# Create a type for "wp site" commands
 define wp::site (
-	$url,
-	$location       = $title,
-	$siteurl        = $url,
-	$sitename       = 'WordPress Site',
-	$admin_user     = 'admin',
-	$admin_email    = 'admin@example.com',
-	$admin_password = 'password',
-	$network        = false,
-	$subdomains     = false,
-	$user           = $::wp::user,
+	$aliases,
+	$location,
 ) {
 	include wp::cli
 
-	if ( $network == true ) and ( $subdomains == true ) {
-		$install = "multisite-install --subdomains --url='${url}'"
+	create_subsite { $aliases:
+		aliases  => $aliases,
+		location => $location,
 	}
-	elsif ( $network == true ) {
-		$install = "multisite-install --url='${url}'"
-	}
-	else {
-		$install = "install --url='${url}'"
+}
+
+# Create a type for "wp site create"
+define create_subsite (
+	$aliases,
+	$location,
+) {
+	# Generate the slugs for the subsites.
+	if ( $name != $aliases[0] ) {
+		$slug = regsubst( $name, ".${aliases[0]}", '')
 	}
 
-	exec {"wp install ${location}":
-		command => "/usr/bin/wp core ${install} --title='${sitename}' --admin_email='${admin_email}' --admin_name='${admin_user}' --admin_password='${admin_password}'",
-		cwd     => $location,
-		user    => $user,
-		require => [ Class['wp::cli'] ],
-		unless  => '/usr/bin/wp core is-installed'
-	}
-
-	if $siteurl != $url {
-		wp::option {"wp siteurl ${location}":
-			ensure   => 'equal',
-			location => $location,
-			user     => $user,
-			key      => 'siteurl',
-			value    => $siteurl
+	if ( $slug ) {
+		exec { "wp site create --slug=${slug}":
+			cwd       => $location,
+			user      => $::wp::user,
+			command   => "/usr/bin/wp site create --slug=${slug}",
+			unless    => "/usr/bin/wp site list | grep $slug",
+			require   => Class['wp::cli'],
+			onlyif    => "/usr/bin/wp core is-installed",
+			logoutput => true
 		}
-	}
+     }
 }
