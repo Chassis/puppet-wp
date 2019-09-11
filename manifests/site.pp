@@ -16,18 +16,18 @@ define create_subsite (
   $aliases,
   $location,
 ) {
+  # Generate the slugs for the subsites.
   if ( $name != $aliases[0] ) {
-    $slug = regsubst( $name, '.vagrant.local', '')
+    $slug = regsubst( $name, ".${aliases[0]}", '')
   }
   if ( $slug ) {
-    notice($slug)
     exec { "wp site create --slug=${slug}":
-      cwd     => $location,
-      user    => $::wp::user,
-      command => "/usr/bin/wp site create --slug=${slug}",
-      unless  => "/usr/bin/wp site list | grep $slug",
-      require => Class["wp::cli"],
-      onlyif  => "/usr/bin/wp core is-installed",
+      cwd       => $location,
+      user      => $::wp::user,
+      command   => "/usr/bin/wp site create --slug=${slug}",
+      unless    => "/usr/bin/wp site list | grep $slug",
+      require   => Class['wp::cli'],
+      onlyif    => "/usr/bin/wp core is-installed",
       logoutput => true
     }
   }
