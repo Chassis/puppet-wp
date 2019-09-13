@@ -1,29 +1,36 @@
+# A class for WordPress options.
 define wp::option (
 	$location,
-	$key = $title,
-	$value = undef,
-	$ensure = present
+	$key      = $title,
+	$value    = undef,
+	$ensure   = present,
+	$format   = 'plaintext',
+	$autoload = true,
+	$user     = $::wp::user,
 ) {
+	include wp::cli
+
 	case $ensure {
 		present: {
-			$command = "get $key"
+			$command = "add ${key} --format=${format} --autoload=${autoload}"
 		}
 		equal: {
 			if $value == undef {
 				fail('Option value must be specified')
 			}
-			$command = "update $key $value"
+			$command = "update ${key} ${value}"
 		}
 		absent: {
-			$command = "delete $key"
+			$command = "delete ${key}"
 		}
 		default: {
 			fail('Invalid option operation')
 		}
 	}
 
-	wp::command { "$location option $command":
+	wp::command { "${location} option ${command}":
 		location => $location,
-		command => "option $command"
+		command  => "option ${command}",
+		user     => $user,
 	}
 }

@@ -1,11 +1,14 @@
+# A class for WP-CLI rewrites.
 define wp::rewrite (
 	$location,
-	$structure = $title
+	$structure = $title,
+	$user      = $::wp::user,
 ) {
 	include wp::cli
 
-	wp::command { "$location rewrite structure '$structure'":
+	wp::command { "${location} rewrite structure '${structure}'":
 		location => $location,
-		command => "rewrite structure '$structure'"
+		command  => "rewrite structure '${structure}'",
+		user     => $user,
 	}
 }

@@ -1,44 +1,65 @@
+# A class for WP-CLI's plugin commands.
 define wp::plugin (
-	$slug = $title,
 	$location,
-	$ensure = enabled,
-	$networkwide = false
+	$slug        = $title,
+	$ensure      = enabled,
+	$networkwide = false,
+	$version     = 'latest',
+	$all         = '',
+	$skipdelete  = '',
+	$unless      = undef,
+	$user        = $::wp::user,
+	$onlyif      = '/usr/bin/wp core is-installed',
 ) {
 	include wp::cli
 
-	case $ensure {
-		enabled: {
-			$command = "activate $slug"
+	if ( $networkwide ) {
+		$network = ' --network'
+	}
 
-			exec { "wp install plugin $title":
-				cwd     => $location,
-				user    => $::wp::user,				
-				command => "/usr/bin/wp plugin install $slug",
-				unless  => "/usr/bin/wp plugin is-installed $slug",
-				before  => Wp::Command["$location plugin $slug $ensure"],
-				require => Class["wp::cli"],
-				onlyif  => "/usr/bin/wp core is-installed"
-			}
+	if ( $version != 'latest' ) {
+		$held = " --version=${version}"
+	}
+
+	if ( empty( $all ) ) {
+		$all = ' --all'
+	}
+
+	if ( empty( $skipdelete ) ) {
+		$skipdelete = ' --skip-delete'
+	}
+
+	case $ensure {
+		activate: {
+			$command = "activate ${slug} ${held}"
+			$unless = "is-active ${slug}"
+		}
+		enabled: {
+			$command = "plugin install ${slug} --activate ${held}"
+			$unless = "plugin is-installed ${slug}"
 		}
 		disabled: {
-			$command = "deactivate $slug"
+			$command = "plugin deactivate ${slug}"
 		}
 		installed: {
-			$command = "install $slug"
+			$command = "plugin install ${slug} ${held}"
+			$unless = "plugin is-installed ${slug}"
+		}
+		deleted: {
+			$command = "plugin delete ${slug}${all}"
+		}
+		uninstalled: {
+			$command = "plugin uninstall ${slug} --deactivate${skipdelete}"
 		}
 		default: {
-			fail("Invalid ensure for wp::plugin")
+			fail('Invalid ensure argument passed into wp::plugin')
 		}
 	}
-
-	if $networkwide {
-		$args = "plugin $command --network"
-	}
-	else {
-		$args = "plugin $command"
-	}
-	wp::command { "$location plugin $slug $ensure":
+	wp::command { "${location} plugin ${command}":
 		location => $location,
-		command => $args
+		command  => "plugin ${command}",
+		unless   => $unless,
+		user     => $user,
+		onlyif   => $onlyif,
 	}
 }
