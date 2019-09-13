@@ -14,13 +14,13 @@ define wp::core (
 	include wp::cli
 
 	if ( $network == true ) and ( $subdomains == true ) {
-		$install = "multisite-install --subdomains --url='${url}'"
+		$install = "multisite-install --subdomains --url='$url'"
 	}
 	elsif ( $network == true ) {
-		$install = "multisite-install --url='${url}'"
+		$install = "multisite-install --url='$url'"
 	}
 	else {
-		$install = "install --url='${url}'"
+		$install = "install --url='$url'"
 	}
 
 	$command = "${install} --title='${sitename}' --admin_email='${admin_email}' --admin_user='${admin_user}' --admin_password='${admin_password}'"
@@ -35,10 +35,10 @@ define wp::core (
 
 	if $siteurl != $url {
 		wp::option {"wp siteurl ${location}":
-			ensure   => 'equal',
 			location => $location,
+			ensure   => "equal",
 			user     => $user,
-			key      => 'siteurl',
+			key      => "siteurl",
 			value    => $siteurl
 		}
 	}
