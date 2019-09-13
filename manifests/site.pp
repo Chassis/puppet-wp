@@ -31,5 +31,5 @@ define create_subsite (
 			onlyif    => "/usr/bin/wp core is-installed",
 			logoutput => true
 		}
-     }
+	}
 }

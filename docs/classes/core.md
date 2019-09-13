@@ -1,15 +1,15 @@
-# Site
+# Core
 
 * [Description](/classes/site.html#description)
 * [Attributes](/classes/site.html#attributes)
 
 ## Description
 
-Installs WordPress using WP-CLI.
+Downloads, installs, and manages a WordPress installation.
 
 ## Attributes
 ```puppet
-    wp::site { 'resource title':
+    wp::core { 'resource title':
       url            => # The URL of the WordPress site.
       location       => # The location to run the command.
       siteurl        => # The URL of the WordPress site.
@@ -84,7 +84,7 @@ The user to use to run the command.
 #### Examples
 Setup a normal WordPress installation.
 ```puppet
-  wp::site { 'Setup a WordPress Site':
+  wp::core { 'Setup a WordPress Site':
     url            => "http://vagrant.local/",
     location       => '/vagrant'
     sitename       => 'My Amazing Site',
@@ -96,7 +96,7 @@ Setup a normal WordPress installation.
 
 Setup a WordPress multisite installation in subfolders.
 ```puppet
-  wp::site { 'Setup a WordPress Site':
+  wp::core { 'Setup a WordPress Site':
     url            => "http://vagrant.local/",
     location       => '/vagrant'
     sitename       => 'My Amazing Site',
@@ -109,7 +109,7 @@ Setup a WordPress multisite installation in subfolders.
 
 Setup a WordPress multisite installation with subdomains.
 ```puppet
-  wp::site { 'Setup a WordPress Site':
+  wp::core { 'Setup a WordPress Site':
     url            => "http://vagrant.local/",
     location       => '/vagrant'
     sitename       => 'My Amazing Site',
