@@ -1,8 +1,9 @@
 # A class to install WP-CLI.
 class wp::cli (
-	$ensure = 'installed',
+	$ensure       = 'installed',
 	$install_path = '/usr/local/src/wp-cli',
-	$version = 'dev-master'
+	$version      = 'dev-master',
+
 ) {
 	include wp
 
@@ -27,14 +28,14 @@ class wp::cli (
 		}
 
 		# Symlink it across
-		file { '/usr/bin/wp':
+		file { "${wp::params::bin_path}/wp":
 			ensure  => link,
 			target  => "${install_path}/bin/wp",
 			require => File[ "${install_path}/bin/wp" ],
 		}
 	}
 	elsif 'absent' == $ensure {
-		file { '/usr/bin/wp':
+		file { "${wp::params::bin_path}/wp":
 			ensure => absent,
 		}
 		file { '/usr/local/src/wp-cli':

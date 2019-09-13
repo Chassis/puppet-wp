@@ -4,7 +4,7 @@ class wp::user (
   $ensure = present,
   $args,
   $user   = $::wp::user,
-  $onlyif = '/usr/bin/wp core is-installed',
+  $onlyif = "${wp::params::bin_path}/wp core is-installed",
 ) {
   include wp::cli
 

@@ -54,7 +54,7 @@ Values: `true` or `false`.
 
 ### onlyif
 
-(*If omitted, this attribute’s value defaults to `/usr/bin/wp core is-installed`.*)
+(*If omitted, this attribute’s value defaults to `/usr/local/bin/wp core is-installed`.*)
 
 You can pass one or more checks into Puppet for this.
 

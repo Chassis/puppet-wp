@@ -52,6 +52,6 @@ A string of arguments to pass to the command. e.g.
 
 ### onlyif
 
-(*If omitted, this attribute’s value defaults to `/usr/bin/wp core is-installed`.*)
+(*If omitted, this attribute’s value defaults to `/usr/local/bin/wp core is-installed`.*)
 
 You can pass one or more checks into Puppet for this.

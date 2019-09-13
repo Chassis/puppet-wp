@@ -93,7 +93,7 @@ A test command that checks the state of the target system and restricts when the
 
 ### onlyif
 
-(*If omitted, this attribute’s value defaults to `/usr/bin/wp core is-installed`.*)
+(*If omitted, this attribute’s value defaults to `/usr/local/bin/wp core is-installed`.*)
 
 ### Example
 

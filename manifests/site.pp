@@ -25,10 +25,10 @@ define create_subsite (
 		exec { "wp site create --slug=${slug}":
 			cwd       => $location,
 			user      => $::wp::user,
-			command   => "/usr/bin/wp site create --slug=${slug}",
-			unless    => "/usr/bin/wp site list | grep $slug",
+			command   => "${wp::params::bin_path}/wp site create --slug=${slug}",
+			unless    => "${wp::params::bin_path}/wp site list | grep $slug",
 			require   => Class['wp::cli'],
-			onlyif    => "/usr/bin/wp core is-installed",
+			onlyif    => "${wp::params::bin_path}/wp core is-installed",
 			logoutput => true
 		}
 	}
