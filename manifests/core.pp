@@ -28,7 +28,7 @@ define wp::core (
 	wp::command { "${location} core ${command}":
 		location => $location,
 		command  => "core ${command}",
-		unless   => '/usr/bin/wp core is-installed',
+		unless   => "${wp::params::bin_path}/wp core is-installed",
 		user     => $user,
 		onlyif   => [],
 	}
