@@ -2,6 +2,7 @@
 define wp::site (
 	$aliases,
 	$location,
+	$user = $::wp::user
 ) {
 	include wp::cli
 
@@ -10,7 +11,6 @@ define wp::site (
 		location => $location,
 	}
 }
-
 # Create a type for "wp site create"
 define create_subsite (
 	$aliases,
@@ -24,12 +24,12 @@ define create_subsite (
 	if ( $slug ) {
 		exec { "wp site create --slug=${slug}":
 			cwd       => $location,
-			user      => $::wp::user,
+			user      => $user,
 			command   => "/usr/bin/wp site create --slug=${slug}",
 			unless    => "/usr/bin/wp site list | grep $slug",
 			require   => Class['wp::cli'],
 			onlyif    => "/usr/bin/wp core is-installed",
 			logoutput => true
 		}
-     }
+	}
 }
