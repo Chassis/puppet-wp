@@ -22,34 +22,34 @@ define wp::plugin (
 	}
 
 	if ( empty( $all ) ) {
-		$all = ' --all'
+		$delete_all_plugins = ' --all'
 	}
 
 	if ( empty( $skipdelete ) ) {
-		$skipdelete = ' --skip-delete'
+		$skip_deleting_plugins = ' --skip-delete'
 	}
 
 	case $ensure {
 		activate: {
 			$command = "activate ${slug} ${held}"
-			$unless = "is-active ${slug}"
+			$unless_check = "is-active ${slug}"
 		}
 		enabled: {
 			$command = "plugin install ${slug} --activate ${held}"
-			$unless = "plugin is-installed ${slug}"
+			$unless_check = "plugin is-installed ${slug}"
 		}
 		disabled: {
 			$command = "plugin deactivate ${slug}"
 		}
 		installed: {
 			$command = "plugin install ${slug} ${held}"
-			$unless = "plugin is-installed ${slug}"
+			$unless_check = "plugin is-installed ${slug}"
 		}
 		deleted: {
-			$command = "plugin delete ${slug}${all}"
+			$command = "plugin delete ${slug}${delete_all_plugins}"
 		}
 		uninstalled: {
-			$command = "plugin uninstall ${slug} --deactivate${skipdelete}"
+			$command = "plugin uninstall ${slug} --deactivate${skip_deleting_plugins}"
 		}
 		default: {
 			fail('Invalid ensure argument passed into wp::plugin')
@@ -58,7 +58,7 @@ define wp::plugin (
 	wp::command { "${location} plugin ${command}":
 		location => $location,
 		command  => "plugin ${command}",
-		unless   => $unless,
+		unless   => $unless_check,
 		user     => $user,
 		onlyif   => $onlyif,
 	}
