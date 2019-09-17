@@ -5,6 +5,7 @@ define wp::theme (
 	$ensure      = enabled,
 	$networkwide = false,
 	$version     = 'latest',
+	$unless      = undef,
 	$user        = $::wp::user,
 	$onlyif      = "${wp::params::bin_path}/wp core is-installed",
 	$all         = false,
@@ -61,6 +62,7 @@ define wp::theme (
 		location => $location,
 		command  => "theme ${command}",
 		user     => $user,
+		unless   => $unless,
 		onlyif   => $onlyif,
 	}
 }
