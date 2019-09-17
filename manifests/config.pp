@@ -1,10 +1,10 @@
 # A class for WP-CLI's config commands.
 class wp::config (
 	$location,
-	$ensure = present,
 	$dbname,
 	$dbuser,
 	$dbpass,
+	$ensure = present,
 	$dbhost	   = 'localhost',
 	$dbprefix  = 'wp_',
 	$dbcharset = 'utf8',
