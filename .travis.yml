@@ -4,6 +4,7 @@ install:
   - npm ci
 script:
   - puppet-lint --fail-on-warnings --no-140chars-check --no-2sp_soft_tabs-check --no-hard_tabs-check --no-names_containing_dash-check --no-autoloader_layout-check --no-nested_classes_or_defines-check manifests
+  - bundle exec rake spec
 language: node_js
 node_js:
   - lts/*
