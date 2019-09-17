@@ -32,30 +32,30 @@ define wp::plugin (
 	case $ensure {
 		activate: {
 			$command = "activate ${slug} ${held}"
-			$unless_check = "is-active ${slug}"
+			$unless_check = "${wp::params::bin_path}/wp plugin is-active ${slug}"
 		}
 		enabled: {
-			$command = "plugin install ${slug} --activate ${held}"
-			$unless_check = "plugin is-installed ${slug}"
+			$command = "install ${slug} --activate ${held}"
+			$unless_check = "${wp::params::bin_path}/wp plugin is-installed ${slug}"
 		}
 		disabled: {
-			$command = "plugin deactivate ${slug}"
+			$command = "${wp::params::bin_path}/wp plugin deactivate ${slug}"
 		}
 		installed: {
-			$command = "plugin install ${slug} ${held}"
-			$unless_check = "plugin is-installed ${slug}"
+			$command = "install ${slug} ${held}"
+			$unless_check = "${wp::params::bin_path}/wp plugin is-installed ${slug}"
 		}
 		deleted: {
-			$command = "plugin delete ${slug}${delete_all_plugins}"
+			$command = "delete ${slug}${delete_all_plugins}"
 		}
 		uninstalled: {
-			$command = "plugin uninstall ${slug} --deactivate${skip_deleting_plugins}"
+			$command = "uninstall ${slug} --deactivate${skip_deleting_plugins}"
 		}
 		default: {
 			fail('Invalid ensure argument passed into wp::plugin')
 		}
 	}
-	wp::command { "${location} plugin ${command}":
+	wp::command { "${location} ${command}":
 		location => $location,
 		command  => "plugin ${command}",
 		unless   => $unless_check,
