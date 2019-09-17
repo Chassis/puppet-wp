@@ -42,6 +42,12 @@ Values: `activate`, `enabled`, `disabled`, `installed`, `deleted` or `mod`.
 
 Values: `latest` or a version number e.g. `1.3`.
 
+### unless
+
+(*If omitted, this attribute’s value defaults to `undef` which Puppet treats as `false`.*)
+
+A test command that checks the state of the target system and restricts when the command can run.
+
 ### user
 
 (*If omitted, this attribute’s value defaults to `www-data`.*)
