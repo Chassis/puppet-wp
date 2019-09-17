@@ -1,9 +1,9 @@
 # A class for WP-CLI's cap commands.
 define wp::cap (
-  $location,
-  $ensure = present,
   $role,
   $cap,
+  $location,
+  $ensure = present,
   $grant  = true,
   $user   = $::wp::user,
   $onlyif = "${wp::params::bin_path}/wp core is-installed",

@@ -1,10 +1,10 @@
 # A class for WP-CLI's config commands.
 class wp::config (
 	$location,
-	$ensure = present,
 	$dbname,
 	$dbuser,
 	$dbpass,
+	$ensure = present,
 	$dbhost	   = 'localhost',
 	$dbprefix  = 'wp_',
 	$dbcharset = 'utf8',
@@ -13,7 +13,7 @@ class wp::config (
 	$value     = '',
 	$user      = $::wp::user,
 	$unless    = undef,
-	$onlyif    = "${wp::params::bin_path}/wp" is-installed",
+	$onlyif    = "${wp::params::bin_path}/wp is-installed",
 ) {
 	case $ensure {
 		present: {

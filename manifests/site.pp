@@ -26,7 +26,7 @@ define create_subsite (
 			cwd       => $location,
 			user      => $::wp::user,
 			command   => "${wp::params::bin_path}/wp site create --slug=${slug}",
-			unless    => "${wp::params::bin_path}/wp site list | grep $slug",
+			unless    => "${wp::params::bin_path}/wp site list | grep ${slug}",
 			require   => Class['wp::cli'],
 			onlyif    => "${wp::params::bin_path}/wp core is-installed",
 			logoutput => true
