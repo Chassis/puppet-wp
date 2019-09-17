@@ -1,9 +1,9 @@
 # A class for WP-CLI roles.
 define wp::role (
   $location,
-  $ensure = present,
   $id,
   $rolename,
+  $ensure = present,
   $all    = false,
   $user   = $::wp::user,
   $onlyif = "${wp::params::bin_path}/wp core is-installed",
@@ -19,7 +19,7 @@ define wp::role (
     }
     reset: {
       if ( $all ) {
-        $command = "reset --all"
+        $command = 'reset --all'
       } else {
         $command = "reset ${id}"
       }
