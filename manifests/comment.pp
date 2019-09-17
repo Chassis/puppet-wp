@@ -1,11 +1,11 @@
 # A class for WP-CLI's commend commands.
 class wp::comment (
   $location,
+  $args,
   $ensure      = present,
   $metacommand = false,
   $user        = $::wp::user,
   $onlyif      = "${wp::params::bin_path}/wp core is-installed",
-  $args,
 ) {
   include wp::cli
 

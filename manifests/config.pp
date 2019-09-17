@@ -13,7 +13,7 @@ class wp::config (
 	$value     = '',
 	$user      = $::wp::user,
 	$unless    = undef,
-	$onlyif    = "${wp::params::bin_path}/wp" is-installed",
+	$onlyif    = "${wp::params::bin_path}/wp is-installed",
 ) {
 	case $ensure {
 		present: {

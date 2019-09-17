@@ -1,8 +1,8 @@
 # A class for WP-CLI's user commands.
 class wp::user (
   $location,
-  $ensure = present,
   $args,
+  $ensure = present,
   $user   = $::wp::user,
   $onlyif = "${wp::params::bin_path}/wp core is-installed",
 ) {
