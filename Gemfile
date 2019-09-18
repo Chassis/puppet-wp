@@ -9,5 +9,5 @@ end
 gem 'rake'
 gem 'puppet-lint'
 gem 'rspec-puppet'
+gem 'syck'
 gem 'puppet', puppetversion
-
