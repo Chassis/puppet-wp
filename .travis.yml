@@ -3,7 +3,7 @@ env:
 matrix:
   include:
     - language: ruby
-      rvm: 2.3.7
+      rvm: 2.1.x
       install:
         - bundle install
         - bundle exec rake spec
