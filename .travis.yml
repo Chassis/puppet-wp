@@ -5,6 +5,7 @@ matrix:
   include:
     - language: ruby
       install:
+        - gem update --system
         - bundle install
         - bundle exec rake spec
       script:
