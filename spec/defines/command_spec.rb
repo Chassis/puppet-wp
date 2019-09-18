@@ -1,5 +1,4 @@
 require 'spec_helper'
-YAML::ENGINE.yamler = 'syck'
 
 describe 'Wp::Command' do
 	let(:environment) { 'development' }
