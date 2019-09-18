@@ -1,8 +1,12 @@
+env:
+  - PUPPET_VERSION=3.8.5
 matrix:
   include:
     - language: ruby
+      rvm: 2.1.10
       install:
-        - gem install puppet-lint
+        - bundle install
+        - bundle exec rake spec
       script:
         - puppet-lint --fail-on-warnings --no-140chars-check --no-2sp_soft_tabs-check --no-hard_tabs-check --no-names_containing_dash-check --no-autoloader_layout-check --no-nested_classes_or_defines-check manifests
     - language: node_js
