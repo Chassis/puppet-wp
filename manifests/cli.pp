@@ -53,21 +53,27 @@ class wp::cli (
 		}
 	}
 
-	if ! defined( Package[ $::wp::php_package ] ) {
-		package { $::wp::php_package:
-			ensure => installed,
+	if $manage_php_package {
+		if ! defined( Package[ $::wp::php_package ] ) {
+			package { $::wp::php_package:
+				ensure => installed,
+			}
 		}
 	}
 
-	if ! defined(Package['curl']) {
-		package { 'curl':
-			ensure => installed,
+	if $manage_curl_package {
+		if ! defined(Package['curl']) {
+			package { 'curl':
+				ensure => installed,
+			}
 		}
 	}
 
-	if ! defined(Package['git']) {
-		package { 'git':
-			ensure => installed,
+	if $manage_git_package {
+		if ! defined(Package['git']) {
+			package { 'git':
+				ensure => installed,
+			}
 		}
 	}
 }
