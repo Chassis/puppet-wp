@@ -45,7 +45,7 @@ class wp::cli (
 		}
 	}
 	elsif 'absent' == $ensure {
-		file { "${wp::bin_path}/":
+		file { "${wp::bin_path}/${wp::executable_filename}":
 			ensure => absent,
 		}
 		file { '/usr/local/src/wp-cli':
@@ -53,27 +53,21 @@ class wp::cli (
 		}
 	}
 
-	if $manage_php_package {
-		if ! defined( Package[ $::wp::php_package ] ) {
-			package { $::wp::php_package:
-				ensure => installed,
-			}
+	if $manage_php_package and ! defined( Package[ $::wp::php_package ] ) {
+		package { $::wp::php_package:
+			ensure => installed,
 		}
 	}
 
-	if $manage_curl_package {
-		if ! defined(Package['curl']) {
-			package { 'curl':
-				ensure => installed,
-			}
+	if $manage_curl_package and ! defined(Package['curl']) {
+		package { 'curl':
+			ensure => installed,
 		}
 	}
 
-	if $manage_git_package {
-		if ! defined(Package['git']) {
-			package { 'git':
-				ensure => installed,
-			}
+	if $manage_git_package and ! defined(Package['git']) {
+		package { 'git':
+			ensure => installed,
 		}
 	}
 }
