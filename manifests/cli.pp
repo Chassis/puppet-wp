@@ -36,7 +36,7 @@ class wp::cli (
 				require => File[ "${install_path}/bin/wp" ],
 			}
 		} else {
-			
+
 			file { "${install_path}/bin/${wp::executable_filename}":
 				ensure  => 'present',
 				content => template('wp/wp.bat.erb'),
@@ -53,19 +53,19 @@ class wp::cli (
 		}
 	}
 
-	if $manage_php_package and ! defined( Package[ $::wp::php_package ] ) {
+	if $::wp::manage_php_package and ! defined( Package[ $::wp::php_package ] ) {
 		package { $::wp::php_package:
 			ensure => installed,
 		}
 	}
 
-	if $manage_curl_package and ! defined(Package['curl']) {
+	if $::wp::manage_curl_package and ! defined(Package['curl']) {
 		package { 'curl':
 			ensure => installed,
 		}
 	}
 
-	if $manage_git_package and ! defined(Package['git']) {
+	if $::wp::manage_git_package and ! defined(Package['git']) {
 		package { 'git':
 			ensure => installed,
 		}

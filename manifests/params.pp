@@ -8,7 +8,7 @@ class wp::params {
 	$executable_filename = $::operatingsystem ? {
 		'windows' => 'wp.bat',
 		default   => 'wp',
-	} 
+	}
 	$php_package = $::operatingsystem ? {
 		/^(Debian|Ubuntu)$/ => 'php5-cli',
 		'windows'           => 'php',
