@@ -11,3 +11,5 @@ gem 'puppet-lint'
 gem 'rspec-puppet'
 gem 'syck'
 gem 'puppet', puppetversion
+gem "puppetlabs_spec_helper", "2.10.0"
+

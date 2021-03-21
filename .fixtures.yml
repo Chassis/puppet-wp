@@ -1,0 +1,3 @@
+fixtures:
+  repositories:
+    archive: "git://github.com/voxpupuli/puppet-archive"

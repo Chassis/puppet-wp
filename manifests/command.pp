@@ -4,12 +4,12 @@ define wp::command (
 	$command,
 	$user = $::wp::user,
 	$unless = undef,
-	$onlyif = "${wp::params::bin_path}/wp is-installed",
+	$onlyif = "${wp::bin_path}/${wp::executable_filename} core is-installed",
 ) {
 	include wp::cli
 
 	exec {"${location} wp ${command}":
-		command => "${wp::params::bin_path}/wp ${command}",
+		command => "${wp::bin_path}/${wp::executable_filename} ${command}",
 		cwd     => $location,
 		user    => $user,
 		require => [ Class['wp::cli'] ],
