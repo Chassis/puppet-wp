@@ -1,0 +1,34 @@
+{
+  "name": "chassis/puppet_wp",
+  "version": "1.2.0",
+  "author": "Ryan McCue, Bronson Quick",
+  "summary": "This modules manages your WordPress sites using WP-CLI, allowing you to install your site, manage plugins, themes, options and more.",
+  "license": "LGPL-3.0 License",
+  "source": "https://github.com/Chassis/puppet-wp",
+  "project_page": "https://chassis.github.io/puppet-wp/",
+  "issues_url": "https://github.com/Chassis/puppet-wp/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc",
+  "dependencies": [],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "16.04",
+        "18.04",
+        "20.04"
+      ]
+    },
+    {
+      "operatingsystem": "Windows",
+      "operatingsystemrelease": [
+        "10"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 5.4.0"
+    }
+  ],
+  "tags": ["wordpress","wp-cli"]
+}
