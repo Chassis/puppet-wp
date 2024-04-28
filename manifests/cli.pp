@@ -5,7 +5,7 @@ class wp::cli (
 	$version      = 'dev-master',
 
 ) inherits wp {
-	if $::osfamily == 'Windows' {
+	if $facts['os']['family'] == 'Windows' {
 		Package { provider => 'chocolatey' }
 	}
 
@@ -21,7 +21,7 @@ class wp::cli (
 			path   => "${install_path}/bin/wp-cli.phar",
 		}
 
-		if $::kernel == 'Linux' {
+		if $facts['kernel'] == 'Linux' {
 			file { "${install_path}/bin/${wp::executable_filename}":
 				ensure  => 'present',
 				content => template('wp/wp.sh.erb'),
