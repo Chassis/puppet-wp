@@ -5,6 +5,7 @@ define wp::theme (
 	$ensure      = enabled,
 	$networkwide = false,
 	$version     = 'latest',
+	$held        = '',
 	$unless      = undef,
 	$user        = $::wp::user,
 	$onlyif      = "${wp::params::bin_path}/wp core is-installed",
