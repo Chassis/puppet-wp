@@ -5,6 +5,7 @@ define wp::plugin (
 	$ensure      = enabled,
 	$networkwide = false,
 	$version     = 'latest',
+	$held        = '',
 	$all         = '',
 	$skipdelete  = '',
 	$unless      = undef,
