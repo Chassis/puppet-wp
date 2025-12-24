@@ -8,7 +8,7 @@ To publish the module on Puppet Forge you need to install the [Puppet Developmen
 
 ### Installation on Mac OS X
 
-Run `brew cask install puppetlabs/puppet/pdk`.
+Run `brew install --cask puppetlabs/puppet/pdk`.
 
 ### Installation on Linux
 
