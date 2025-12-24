@@ -1,5 +1,5 @@
 {
-  "name": "chassis/puppet_wp",
+  "name": "chassis-puppet_wp",
   "version": "1.3.0",
   "author": "Ryan McCue, Bronson Quick",
   "summary": "This modules manages your WordPress sites using WP-CLI, allowing you to install your site, manage plugins, themes, options and more.",
@@ -7,7 +7,9 @@
   "source": "https://github.com/Chassis/puppet-wp",
   "project_page": "https://chassis.github.io/puppet-wp/",
   "issues_url": "https://github.com/Chassis/puppet-wp/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc",
-  "dependencies": [],
+  "dependencies": [
+
+  ],
   "operatingsystem_support": [
     {
       "operatingsystem": "Ubuntu",
@@ -31,5 +33,11 @@
       "version_requirement": ">= 5.4.0"
     }
   ],
-  "tags": ["wordpress","wp-cli"]
+  "tags": [
+    "wordpress",
+    "wp-cli"
+  ],
+  "pdk-version": "3.4.0",
+  "template-url": "pdk-default#3.4.0",
+  "template-ref": "tags/3.4.0-0-gd3cc13f"
 }
